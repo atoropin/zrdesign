@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Car;
-use Illuminate\Http\Request;
+use App\CarBrand;
+use App\CarModel;
 
 class CarController extends Controller
 {
     public function index()
     {
+        $carBrands = CarBrand::with('models')->orderBy('name', 'asc')->get();
 
-        $cars = Car::all();
+        return view('index')->with(compact('carBrands'));
+    }
 
-        return view('index')->with(compact('cars'));
+    public function carBrand($id)
+    {
+        return $brandModels = CarModel::where('car_brand_id', $id)->get();
     }
 }
