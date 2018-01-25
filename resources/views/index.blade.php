@@ -5,54 +5,79 @@
 </head>
 <body>
 <style>
-    .dropdown {
-        display: none;
-        position: absolute;
-        left: 0;
-        background: #fff;
-        width: 500px;
+    body {
+        width: 960px;
+
+        background: #000;
     }
 
-    .pushright {
-        display: none;
-        position: absolute;
-        background: #fff;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: #222;
     }
 
-    .link {
+    ul li {
+        display: block;
         position: relative;
-    }
-    
-    .link:hover .dropdown{
-        display: block
+        float: left;
+        background: #222;
     }
 
-    .secondlink {
-        position: relative;
+    li ul { display: none; }
+
+    ul li a {
+        display: block;
+        padding: 1em;
+        text-decoration: none;
+        white-space: nowrap;
+        color: #fff;
     }
 
-    .secondlink:hover .pushright{
-        display: block
+    ul li a:hover { background: #2c3e50; }
+
+    li:hover > ul {
+        display: block;
+        position: absolute;
     }
+
+    li:hover li { float: none; }
+
+    li:hover a { background: #222; }
+
+    li:hover li a:hover { background: #2c3e50; }
+
+    .main-navigation li ul li { border-top: 0; }
+
+    ul ul ul {
+        left: 100%;
+        top: 0;
+    }
+
+    ul:before,
+    ul:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    ul:after { clear: both; }
 </style>
-    <ul>
-        @foreach ($carBrands as $carBrand)
-            <li class="link" style="display: inline; border: 1px solid #000; padding: 5px; margin: 2px;">{{ $carBrand->name }}
-                <div class="dropdown">
-                    @foreach($carBrand->models as $model)
-                    <ul>
-                        <li class="secondlink" style="display: block; border: 1px solid #000; padding: 5px; margin: 2px;">{{ $model->name }}
-                        <div class="pushright">
-                            @foreach($model->bodies as $body)
+
+    <ul class="main-navigation">
+        @foreach ($brands as $brand)
+            <li><a href="#">{{ $brand->name }}</a>
+                <ul>
+                    @foreach($brand->models as $model)
+                        <li><a href="#">{{ $model->name }}</a>
                             <ul>
-                                <li>{{ $body->name }}</li>
+                                @foreach($model->bodies as $body)
+                                    <li><a href="/body/{{ $body->id }}">{{ $body->name }}</a></li>
+                                @endforeach
                             </ul>
-                            @endforeach
-                        </div>
                         </li>
-                    </ul>
                     @endforeach
-                </div>
+                </ul>
             </li>
         @endforeach
     </ul>
