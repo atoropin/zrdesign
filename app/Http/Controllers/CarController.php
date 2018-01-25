@@ -9,7 +9,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $carBrands = CarBrand::with('models')->orderBy('name', 'asc')->get();
+        $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
         return view('index')->with(compact('carBrands'));
     }

@@ -12,4 +12,9 @@ class CarModel extends Model
     {
         return $this->belongsTo('App\CarBrand');
     }
+
+    public function bodies()
+    {
+        return $this->hasMany('App\CarBody');
+    }
 }
