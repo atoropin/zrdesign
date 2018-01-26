@@ -15,6 +15,6 @@ class Product extends Model
 
     public function bodies()
     {
-        return $this->belongsToMany('App\CarBody');
+        return $this->belongsToMany('App\CarBody', 'car_bodies_products', 'product_id', 'car_body_id');
     }
 }

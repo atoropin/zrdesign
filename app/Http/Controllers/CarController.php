@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\CarBody;
-use App\CarBodyProduct;
 use App\CarBrand;
 use App\Product;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +18,17 @@ class CarController extends Controller
 
     public function carBody($id)
     {
-        dd(CarBody::with('products')->get());
+        DB::connection()->enableQueryLog();
 
-        $carBody = CarBody::with('model.brand')->findOrFail($id);
+//        $carBody = CarBody::with('model.brand', 'groups')->findOrFail($id);
+        $carBody = CarBody::with('groups')->findOrFail($id);
+
+        dd(DB::getQueryLog());
 
         $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
-        $bodyProducts = Product::where('car_body_id', $id)->get();
+//        $bodyProducts = Product::where('car_body_id', $id)->get();
 
-        return view('body')->with(compact('carBrands', 'carBody', 'bodyProducts'));
+        return view('body')->with(compact('carBrands', 'carBody'));
     }
 }

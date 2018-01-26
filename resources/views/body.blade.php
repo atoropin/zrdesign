@@ -9,7 +9,7 @@
     </ul>
 @endsection
 
-<?php dd($bodyProducts) ?>
+<?php dd($carBody->products[0]->group) ?>
 
 @section('content')
     <h1>{{ $carBody->model->brand->name }}</h1>
