@@ -7,8 +7,20 @@ body {
     margin: 0 auto;
 }
 
+.left-menu {
+    float: left;
+}
+
+.content-container {
+    float: left;
+}
+
 h1, h2, h3 {
     color: #fff;
+}
+
+ul.left {
+    list-style: square;
 }
 
 ul {

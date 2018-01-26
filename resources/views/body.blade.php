@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
 @section('tuning')
-    @parent
-    <ul>
-        <li>
-            fdsfdsfd
-        </li>
-    </ul>
+    <div class="left-menu">
+        Аэродинамика
+        <br>
+        Подвеска
+        <br>
+        Двигатель
+    </div>
 @endsection
-
-<?php dd($carBody->products[0]->group) ?>
 
 @section('content')
     <h1>{{ $carBody->model->brand->name }}</h1>

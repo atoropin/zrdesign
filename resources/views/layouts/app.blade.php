@@ -34,8 +34,7 @@
         @endforeach
     </ul>
 
-    @section('tuning')
-    @show
+    @yield('tuning')
 
     <div class="content-container">
         @yield('content')

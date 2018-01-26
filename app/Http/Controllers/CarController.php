@@ -20,10 +20,8 @@ class CarController extends Controller
     {
         DB::connection()->enableQueryLog();
 
-//        $carBody = CarBody::with('model.brand', 'groups')->findOrFail($id);
-        $carBody = CarBody::with('groups')->findOrFail($id);
-
-        dd(DB::getQueryLog());
+        $carBody = CarBody::with('model.brand')->findOrFail($id);
+//        $carBody = CarBody::with('groups')->findOrFail($id);
 
         $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
