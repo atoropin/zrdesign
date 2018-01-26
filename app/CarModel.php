@@ -10,7 +10,7 @@ class CarModel extends Model
 
     public function brand()
     {
-        return $this->belongsTo('App\CarBrand');
+        return $this->belongsTo('App\CarBrand', 'car_brand_id');
     }
 
     public function bodies()

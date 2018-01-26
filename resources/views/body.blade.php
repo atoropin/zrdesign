@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<style>
-    body {
-        width: 960px;
+@extends('layouts.app')
 
-        background: #000;
-    }
+@section('tuning')
+    @parent
+    <ul>
+        <li>
+            fdsfdsfd
+        </li>
+    </ul>
+@endsection
 
-    h2 {
-        color: #ccc;
-    }
+<?php dd($bodyProducts) ?>
 
-    h3 {
-        color: #ccc;
-    }
-</style>
+@section('content')
+    <h1>{{ $carBody->model->brand->name }}</h1>
 
-<?php dd($body) ?>
+    <h2>{{ $carBody->model->name }}</h2>
 
-<h2>{{ $body->model->name }}</h2>
-
-<h3>{{ $body->id }}</h3>
-
-
-</body>
-</html>
+    <h3>{{ $carBody->name }}</h3>
+@endsection

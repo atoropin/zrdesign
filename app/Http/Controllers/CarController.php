@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\CarBody;
+use App\CarBodyProduct;
 use App\CarBrand;
+use App\Product;
 use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
     public function index()
     {
-        $brands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
+        $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
-        return view('index')->with(compact('brands'));
+        return view('index')->with(compact('carBrands'));
     }
 
-    public function body($id)
+    public function carBody($id)
     {
+        $carBody = CarBody::with('model.brand')->findOrFail($id);
 
-        DB::connection()->enableQueryLog();
+        $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
-        $body = CarBody::with('model')->findOrFail($id);
+        $bodyProducts = CarBodyProduct::with('groups')->where('car_body_id', $id)->get();
 
-        dd(DB::getQueryLog());
-
-        return view('body')->with(compact('body'));
+        return view('body')->with(compact('carBrands', 'carBody', 'bodyProducts'));
     }
 }
