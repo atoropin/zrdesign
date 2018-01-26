@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
-@section('tuning')
+@section('manufacturers')
+    <ul>
+        @foreach($carBody->manufacturers as $manufacturer)
+            <li>{{ $manufacturer->name }}</li>
+        @endforeach
+    </ul>
+@endsection
+
+@section('groups')
     <div class="left-menu">
-        Аэродинамика
-        <br>
-        Подвеска
-        <br>
-        Двигатель
+        @foreach($carBody->groups as $group)
+            {{ $group->name }}<br>
+        @endforeach
     </div>
 @endsection
 

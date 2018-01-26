@@ -18,14 +18,24 @@ class CarController extends Controller
 
     public function carBody($id)
     {
-        DB::connection()->enableQueryLog();
+//        DB::connection()->enableQueryLog();
 
-        $carBody = CarBody::with('model.brand')->findOrFail($id);
+//        $carBody = CarBody::with('model.brand')->findOrFail($id);
 //        $carBody = CarBody::with('groups')->findOrFail($id);
 
-        $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
+        $carBody = CarBody::with([
+            'model.brand',
+            'products.group' => function($query) use (&$groups) {
+                $groups = $query->orderBy('name', 'asc')->get()->unique();
+            },
+            'products.manufacturer' => function($query) use (&$manufacturers) {
+                $manufacturers = $query->orderBy('name', 'asc')->get()->unique();
+            }])->findOrFail($id);
 
-//        $bodyProducts = Product::where('car_body_id', $id)->get();
+        $carBody->groups = $groups;
+        $carBody->manufacturers = $manufacturers;
+
+        $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
         return view('body')->with(compact('carBrands', 'carBody'));
     }

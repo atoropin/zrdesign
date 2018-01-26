@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\CarBody', 'car_bodies_products', 'product_id', 'car_body_id');
     }
+
+    public function manufacturer()
+    {
+        return $this->belongsTo('App\Suppliers');
+    }
 }

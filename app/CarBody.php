@@ -18,8 +18,8 @@ class CarBody extends Model
         return $this->belongsToMany('App\Product', 'car_bodies_products', 'car_body_id', 'product_id');
     }
 
-    public function groups()
-    {
-        return $this->hasManyThrough('App\ProductGroup', 'App\CarBodyProduct', 'car_body_id', 'id', 'id', 'product_id');
-    }
+//    public function groups()
+//    {
+//        return $this->hasManyThrough('App\ProductGroup', 'App\CarBodyProduct', 'car_body_id', 'id', 'id', 'product_id');
+//    }
 }

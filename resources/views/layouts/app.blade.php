@@ -11,9 +11,9 @@
     <ul class="main-navigation">
         @foreach ($carBrands as $brand)
             @if(isset($carBody) and ($brand->name == $carBody->model->brand->name))
-            <u><li><a href="#">{{ $brand->name }}</a></u>
+                <u><li><a href="#">{{ $brand->name }}</a></u>
             @else
-            <li><a href="#">{{ $brand->name }}</a>
+                <li><a href="#">{{ $brand->name }}</a>
             @endif
                 <ul>
                     @foreach($brand->models as $model)
@@ -34,7 +34,9 @@
         @endforeach
     </ul>
 
-    @yield('tuning')
+    @yield('manufacturers')
+
+    @yield('groups')
 
     <div class="content-container">
         @yield('content')
