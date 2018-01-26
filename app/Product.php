@@ -12,4 +12,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\ProductGroup', 'product_group_id');
     }
+
+    public function bodies()
+    {
+        return $this->belongsToMany('App\CarBody');
+    }
 }
