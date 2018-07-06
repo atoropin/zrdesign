@@ -1,0 +1,263 @@
+.backProjects {
+  visibility: visible;
+}
+
+.Alert {
+  text-align: center;
+  font-family: Verdana, Arial, "Helvetica CY", Helvetica, "Nimbus Sans L", sans-serif;
+  font-size: 27px;
+  letter-spacing: 0.1px;
+  line-height: 1.2em;
+}
+.Alert-ins {
+  display: inline-block;
+  padding: 20px;
+  background: #dcafaf;
+}
+@media screen and (max-width: 990px) {
+  .Alert-ins {
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+.Article {
+  padding: 15px 18px 25px;
+  background: #f1efef;
+  font-family: Verdana, Arial, "Helvetica CY", Helvetica, "Nimbus Sans L", sans-serif;
+  font-size: 30px;
+  line-height: 1.6em;
+  margin-top: 5px;
+}
+.Article:before,
+.Article:after {
+  content: "";
+  display: table;
+}
+.Article:after {
+  clear: both;
+}
+@media screen and (max-width: 990px) {
+  .Article {
+    font-size: 22px;
+  }
+}
+.Article p {
+  margin-bottom: 53px;
+}
+.Article p + p {
+  text-indent: 38px;
+}
+
+.Header {
+  padding-left: 10px;
+  padding-right: 7px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+@media screen and (max-width: 990px) {
+  .Header {
+    position: relative;
+    display: block;
+    padding-top: 20px;
+  }
+}
+.Header-logo {
+  position: relative;
+  margin-right: 50px;
+  margin-top: 4px;
+}
+.Header-ins {
+  max-width: 1790px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 990px) {
+  .Header-ins {
+    display: block;
+  }
+}
+.Header-trigger {
+  float: right;
+  display: none;
+}
+@media screen and (max-width: 990px) {
+  .Header-trigger {
+    display: block;
+  }
+}
+.Header-menu {
+  position: relative;
+  margin-right: 15px;
+}
+@media screen and (max-width: 990px) {
+  .Header-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 225px;
+    padding: 8px;
+    background-color: #1f1e1e;
+  }
+  .Header-menu .btn_exit {
+    display: block;
+    color: #000;
+    line-height: 1em;
+    padding-top: 5px;
+    height: 45px;
+  }
+  .Header-menu a {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
+.Header-profile {
+  visibility: visible;
+  display: flex;
+}
+@media screen and (max-width: 990px) {
+  .Header-profile {
+    display: none;
+  }
+}
+
+.Panels {
+  margin-top: 20px;
+  display: flex;
+}
+.Panels_row .Panel + .Panel {
+  margin-left: 20px;
+}
+@media screen and (max-width: 990px) {
+  .Panels {
+    flex-wrap: wrap;
+  }
+  .Panels .Panel {
+    width: 48%;
+    margin-top: 20px;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  .Panels .Panel + .Panel {
+    margin-left: 1%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .Panels {
+    display: block;
+  }
+  .Panels .Panel {
+    width: 100%;
+    margin-top: 15px;
+  }
+  .Panels .Panel + .Panel {
+    margin-left: 0;
+  }
+}
+.Panel {
+  background: #f1efef;
+  padding: 7px 10px 30px;
+  position: relative;
+  width: 100%;
+}
+.Panel + .Panel {
+  margin-left: 45px;
+}
+.Panel-title {
+  font-family: Impact, Verdana, Arial, "Helvetica CY", Helvetica, "Nimbus Sans L", sans-serif;
+  font-size: 21px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.Panel-pict {
+  margin-bottom: 5px;
+}
+.Panel-pict img {
+  width: 100%;
+  height: auto;
+}
+.Panel-content {
+  font-size: 20px;
+}
+.Panel-content_lg {
+  font-size: 21px;
+}
+.Panel-content_small {
+  font-size: 11px;
+}
+.Panel-content_small p {
+  margin-bottom: 15px;
+  line-height: 1.2em;
+}
+.Panel-more {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Panel-more:before,
+.Panel-more:after {
+  content: "";
+  display: table;
+}
+.Panel-more:after {
+  clear: both;
+}
+.Panel-more .btn {
+  float: right;
+}
+
+.Main {
+  margin-top: 25px;
+  min-height: 100px;
+  padding: 0 20px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 83%;
+}
+.Main-top {
+  height: 100px;
+  width: 100%;
+}
+.Main-content {
+  width: 100%;
+}
+.Main-bottom {
+  width: 100%;
+}
+
+.Stick {
+  visibility: visible;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: url("../img/backgrounds/main.jpg") 100px center no-repeat;
+  background-size: cover;
+}
+.Stick > * {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+}
+.Stick:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../img/backgrounds/gradient.png") left center no-repeat;
+  background-size: cover;
+  z-index: 5;
+}
+@media screen and (max-width: 990px) {
+  .Stick {
+    height: auto;
+    min-height: 100%;
+    padding-top: 0;
+  }
+}

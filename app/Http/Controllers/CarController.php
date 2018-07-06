@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\CarBody;
 use App\CarBrand;
-use App\Product;
-use Illuminate\Support\Facades\DB;
+use App\Cart;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    const DOLLAR = 58;
+
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
     public function index()
     {
         $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
@@ -16,12 +23,10 @@ class CarController extends Controller
         return view('index')->with(compact('carBrands'));
     }
 
-    public function carBody($id)
+    public function carBody(Request $request, $bodyId)
     {
-//        DB::connection()->enableQueryLog();
-
-//        $carBody = CarBody::with('model.brand')->findOrFail($id);
-//        $carBody = CarBody::with('groups')->findOrFail($id);
+        $manufacturerId = $request->input('manufacturer');
+        $groupId = $request->input('group');
 
         $carBody = CarBody::with([
             'model.brand',
@@ -30,13 +35,29 @@ class CarController extends Controller
             },
             'products.manufacturer' => function($query) use (&$manufacturers) {
                 $manufacturers = $query->orderBy('name', 'asc')->get()->unique();
-            }])->findOrFail($id);
+            },
+            'products.pictures' => function($query) use (&$pictures) {
+                $pictures = $query->get();
+            }
+            ])
+            ->findOrFail($bodyId);
+
+        $carBodyFiltered = CarBody::with([
+            'products' => function($query) use ($manufacturerId, $groupId) {
+                $manufacturerId ? $query->where('manufacturer_id', $manufacturerId)->get() : null;
+                $groupId ? $query->where('product_group_id', $groupId)->get() : null;
+            }
+            ])
+            ->findOrFail($bodyId);
 
         $carBody->groups = $groups;
         $carBody->manufacturers = $manufacturers;
+        $carBody->pictures = $pictures;
 
         $carBrands = CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
 
-        return view('body')->with(compact('carBrands', 'carBody'));
+        $uCartCount = Cart::where('session_hash', $this->sessionHash)->count();
+
+        return view('body')->with(compact('carBrands', 'carBody', 'carBodyFiltered', 'uCartCount'));
     }
 }
