@@ -8,7 +8,8 @@
 <!--[if IE 9]>
 <html class="ie9" lang="ru">
 <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="ru"> <!--<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ru"> <!--<![endif]-->
 <head>
     <title></title>
     <meta name="description" content="ZR Design">
@@ -16,7 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <link href="favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?hash={{ rand(0, 10) }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/4.13.0/bodymovin.js"></script><!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/4.13.0/bodymovin.js"></script>
+    <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -41,7 +43,8 @@ p.error-browser
                 <ul>
                     @foreach ($brandData as $brand)
                         <li>
-                            <a href="#"><img class="menu-img" src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/></a>
+                            <a href="#"><img onclick="showBrand(event, {{$brand->id}})" class="menu-img"
+                                             src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/></a>
                         </li>
                     @endforeach
                 </ul>
@@ -51,9 +54,9 @@ p.error-browser
     <div class="menu-hz-content">
         <div class="menu-hz">
             @foreach ($brandData as $brand)
-                <ul>
+                <ul id="brand_{{$brand->id}}" class="brand__list">
                     @foreach($brand->models as $model)
-                        <li>{{ $model->name }}</li>
+                        <li onclick="showModel(event, {{$model->id}})">{{ $model->name }}</li>
                     @endforeach
                 </ul>
             @endforeach
@@ -63,7 +66,7 @@ p.error-browser
         <div class="menu-hz">
             @foreach ($brandData as $brand)
                 @foreach($brand->models as $model)
-                    <ul>
+                    <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
                             <li>{{ $body->name }}</li>
                         @endforeach
@@ -76,7 +79,9 @@ p.error-browser
         <div class="menu-sup">
             <ul class="manufacturers">
                 @foreach($manufacturers as $manufacturer)
-                    <li><a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ $manufacturer->name }}</a></li>
+                    <li>
+                        <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ $manufacturer->name }}</a>
+                    </li>
                 @endforeach
             </ul>
         </div>
@@ -84,14 +89,16 @@ p.error-browser
     <div class="main-container">
         <div class="menu-left-content">
             @isset($carBodyInfo)
-            <div class="menu-left-back">
-                <a href="{{ route('products', ['body' => $carBodyInfo['id']]) }}">Полный список</a>
-            </div>
+                <div class="menu-left-back">
+                    <a href="{{ route('products', ['body' => $carBodyInfo['id']]) }}">Полный список</a>
+                </div>
             @endisset
             <div class="menu-left">
                 <ul>
                     @foreach($groups as $group)
-                        <li><a href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a></li>
+                        <li>
+                            <a href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -106,7 +113,9 @@ p.error-browser
                         @endforeach
                     </div>
                     <div>
-                        <a href='#' id="addToCartButton{{ $product->id }}" onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в корзину {{ $product->id }}</a>
+                        <a href='#' id="addToCartButton{{ $product->id }}"
+                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в
+                            корзину {{ $product->id }}</a>
                     </div>
                 @endforeach
             </div>
@@ -121,7 +130,9 @@ p.error-browser
                         @endforeach
                     </div>
                     <div>
-                        <a href='#' id="addToCartButton{{ $product->id }}" onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в корзину {{ $product->id }}</a>
+                        <a href='#' id="addToCartButton{{ $product->id }}"
+                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в
+                            корзину {{ $product->id }}</a>
                     </div>
                 @endforeach
             </div>
@@ -133,33 +144,59 @@ p.error-browser
 <script src="assets/js/jquery-3.3.1.slim.min.js"></script>
 <!--script(src="assets/js/jquery.touchSwipe.min.js")-->
 <script src="assets/js/scripts.js"></script>
-
 <script>
-    $('.manufacturers').mousemove(function(e){
+    window.brands = document.querySelectorAll('.brand__list')
+    window.models = document.querySelectorAll('.model__list')
 
-        // Find the width of all menu elements
+    function jsMenu(e) {
         var totalWidth = 0;
-        $(this).find('li').each(function(i) {
-            totalWidth += parseInt( $(this).outerWidth(), 10 );
+        $(this).find('li').each(function (i) {
+            totalWidth += parseInt($(this).outerWidth(), 10)
         });
 
         // Find the cursor ratio and position the menu
-        var l = (window.innerWidth - totalWidth) * e.pageX / (window.innerWidth-20);
-        $(this).find('li').css('transform','translateX('+ l + 'px)');
+        var l = (window.innerWidth - totalWidth) * e.pageX / (window.innerWidth - 20);
+        $(this).find('li').css('transform', 'translateX(' + l + 'px)');
+    }
 
-    });
+    $('.manufacturers').mousemove(jsMenu)
+
+    function showBrand(event, id) {
+        const active = document.querySelector('.brand__list.active')
+        const activeModel = document.querySelector('.model__list.active')
+        if (activeModel) {
+            activeModel.classList.remove('active')
+        }
+        if (active) {
+            active.classList.remove('active')
+        }
+
+        const menu = document.getElementById(`brand_${id}`);
+        menu.classList.add('active')
+    }
+
+    function showModel(event, id) {
+        const active = document.querySelector('.model__list.active')
+        if (active) {
+            active.classList.remove('active')
+        }
+
+        const model = document.getElementById(`model_${id}`);
+
+        model.classList.add('active')
+    }
 </script>
 
 <script>
     function addToCart(product) {
         $.ajax({
             type: 'POST',
-            url: '/cart/add/'+product,
-            success: function() {
-                $('#addToCartButton'+product).text('Товар добавлен в корзину')
+            url: '/cart/add/' + product,
+            success: function () {
+                $('#addToCartButton' + product).text('Товар добавлен в корзину')
                 setTimeout(() => {
-                    $('#addToCartButton'+product).text('Добавить в корзину')
-            }, 2000)
+                    $('#addToCartButton' + product).text('Добавить в корзину')
+                }, 2000)
             }
         })
         return false;
@@ -167,4 +204,5 @@ p.error-browser
 </script>
 
 <!--+Menu-->
-</body></html>
+</body>
+</html>
