@@ -9,7 +9,6 @@ use App\ProductGroup;
 use App\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -41,13 +40,9 @@ class HomeController extends Controller
 
         $brandData = $this->getCarBrandData();
 
-//        dd($brandData);
-
         $groups = $ProductsCollection['groups'];
         $manufacturers = $ProductsCollection['manufacturers'];
         $products = $ProductsCollection['products'];
-
-//        dd($groups);
 
         return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters'));
     }
@@ -109,8 +104,6 @@ class HomeController extends Controller
 
         $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody]);
 
-//        dd($ProductsCollection);
-
         return $ProductsCollection;
     }
 
@@ -118,72 +111,4 @@ class HomeController extends Controller
     {
         return CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
     }
-
-//    public function getImage($id, $size, $name)
-//    {
-//        $imagePath = 'production/product_pictures/'.$id.'/'.$size.'/'.$name;
-//
-//        return Storage::disk('s3')->get($imagePath);
-//    }
-
-//    public function getProducts(Request $request)
-//    {
-//        $parameters = $request->input();
-//
-//        $manufacturerId = $request->manufacturer;
-//        $groupId = $request->group;
-//
-//        $productsFiltered = Product::with('pictures')
-//            ->when($manufacturerId, function($query) use($manufacturerId) {
-//                $query->where('manufacturer_id', $manufacturerId);
-//            })
-//            ->when($groupId, function($query) use($groupId) {
-//                $query->where('product_group_id', $groupId);
-//            })
-//            ->get();
-//
-//        $groups = ProductGroup::orderBy('name', 'asc')->get();
-//
-//        $manufacturers = Suppliers::whereNotNull('type')->get();
-//
-//        return view('index', compact('productsFiltered', 'groups', 'manufacturers', 'parameters'));
-//    }
-
-//    public function getBodyProducts(Request $request)
-//    {
-//        $parameters = $request->input();
-//
-//        $manufacturerId = $request->manufacturer;
-//        $groupId = $request->group;
-//        $bodyId = $request->body;
-//
-//        $products = CarBody::with([
-//                'model.brand',
-//                'products.group' => function($query) use (&$groups) {
-//                    $groups = $query->orderBy('name', 'asc')->get()->unique();
-//                },
-//                'products.manufacturer' => function($query) use (&$manufacturers) {
-//                    $manufacturers = $query->orderBy('name', 'asc')->get()->unique();
-//                },
-//                'products.pictures' => function($query) use (&$pictures) {
-//                    $pictures = $query->get();
-//                }
-//            ])
-//            ->findOrFail($bodyId);
-//
-//        $productsFiltered = CarBody::with([
-//                'products' => function($query) use ($manufacturerId, $groupId) {
-//                    $manufacturerId ? $query->where('manufacturer_id', $manufacturerId)->get() : null;
-//                    $groupId ? $query->where('product_group_id', $groupId)->get() : null;
-//                }
-//            ])
-//            ->findOrFail($bodyId);
-//
-//        $products->groups = $groups;
-//        $products->manufacturers = $manufacturers;
-//        $products->pictures = $pictures;
-//
-//
-//        return view('body', compact('products', 'manufacturers', 'groups', 'parameters'));
-//    }
 }

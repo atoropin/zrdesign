@@ -26,7 +26,7 @@ class CartController extends Controller
         $item = Cart::where('session_hash', $this->sessionHash)->where('id', $itemId)->firstOrFail();
         $item->delete();
 
-        return redirect('cart/view');
+        return redirect('cart');
     }
 
     public function viewCart()
