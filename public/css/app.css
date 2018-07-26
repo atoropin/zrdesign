@@ -113,8 +113,7 @@ body, html {
 .menu-hz-content {
     margin-bottom: 2px;
     width: 100%;
-    background: #18262f;
-    opacity: 0.5;
+    background-color: rgba(24, 38, 47, 0.5);
 }
 
 .menu-hz {
@@ -188,7 +187,11 @@ body, html {
 }
 
 .menu-left-content {
-    width: 30%;
+    width: 25%;
+}
+
+.menu-left-content a {
+    color: #eeeeee;
 }
 
 .menu-left {
@@ -210,12 +213,26 @@ body, html {
 }
 
 .content {
-    width: 70%;
+    width: 75%;
+}
+
+.carousel {
+    display: flex;
+    width: 75%;
 }
 
 .content-product {
+    width: 75%;
     margin: 20px;
-    background: #cccccc;
+    background-color: rgba(24, 38, 47, 0.7);
+}
+
+.content-product img {
+    height: 150px;
+}
+
+.content-product-info {
+
 }
 
 /*li ul { display: none; }*/
