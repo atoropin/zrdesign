@@ -5,6 +5,7 @@ body, html {
     height: 100%;
     font-family: Verdana, Arial, "Helvetica CY", Helvetica, "Nimbus Sans L", sans-serif;
     background: #273d4b;
+    color: #ffffff;
 }
 
 .site-container {
@@ -34,6 +35,9 @@ body, html {
 }
 
 @media screen and (max-width: 990px) {
+    body {
+        font-size: 0.8em;
+    }
     .main-container {
         height: auto;
         min-height: 100%;
@@ -42,6 +46,9 @@ body, html {
 }
 
 @media screen and (max-width: 990px) {
+    body {
+        font-size: 0.9em;
+    }
     .header {
         position: relative;
         display: block;

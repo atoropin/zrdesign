@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -37,8 +38,35 @@ class CartController extends Controller
         return view('cart')->with(compact('uCart', 'total'));
     }
 
-    public function sendOrder()
+//    public function getFormData(Request $request)
+//    {
+//        $this->validate($request, [
+//            'name' => 'required',
+//            'email' => 'required|email'
+//        ]);
+//
+//        $this->sendOrder();
+//
+//        return back()->with('success', 'Thanks for contacting us!');
+//    }
+
+    public function sendOrder(Request $request)
     {
         //clear cart!!!
+
+        $this->validate($request, [ 'name' => 'required', 'email' => 'required|email', 'message' => 'required' ]);
+
+        Mail::send('email',
+            array(
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'user_message' => $request->get('message')
+            ), function($message)
+            {
+                $message->from('saquib.gt@gmail.com');
+                $message->to('saquib.rizwan@cloudways.com', 'Admin')->subject('Cloudways Feedback');
+            });
+
+        return back()->with('success', 'Thanks for contacting us!');
     }
 }

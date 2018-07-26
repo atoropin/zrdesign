@@ -33,11 +33,27 @@ p.error-browser
     | для правильного отображения сайта.
 -->
 
+<script>
+    function addToCart(product) {
+        $.ajax({
+            type: 'POST',
+            url: '/cart/add/' + product,
+            success: function () {
+                $('#addToCartButton' + product).text('Товар добавлен в корзину')
+                setTimeout(() => {
+                    $('#addToCartButton' + product).text('Добавить в корзину')
+                }, 2000)
+            }
+        })
+        return false;
+    }
+</script>
+
 <div class="site-container">
     <header class="header">
         <div class="header-content">
             <div class="header-logo">
-                <a class="logo" href=""><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
+                <a class="logo" href="/"><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
             </div>
             <div class="header-brand-menu">
                 <ul>
@@ -68,7 +84,7 @@ p.error-browser
                 @foreach($brand->models as $model)
                     <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
-                            <li>{{ $body->name }}</li>
+                            <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
                         @endforeach
                     </ul>
                 @endforeach
@@ -88,9 +104,9 @@ p.error-browser
     </div>
     <div class="main-container">
         <div class="menu-left-content">
-            @isset($carBodyInfo)
+            @isset($parameters['body'])
                 <div class="menu-left-back">
-                    <a href="{{ route('products', ['body' => $carBodyInfo['id']]) }}">Полный список</a>
+                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Полный список</a>
                 </div>
             @endisset
             <div class="menu-left">
@@ -109,13 +125,14 @@ p.error-browser
                     <div class="content-product">
                         {{ $product->name }}
                         @foreach($product->pictures as $picture)
-                            <img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
+                            {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
+                            <img src="{{ env('S3_SITE', 'http://s3.eu-west-1.amazonaws.com/zrdesign/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
                         @endforeach
                     </div>
-                    <div>
+                    <div>{{ $product->base_price * env('DOLLAR', '62') }}<br/>
                         <a href='#' id="addToCartButton{{ $product->id }}"
-                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в
-                            корзину {{ $product->id }}</a>
+                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
+                            корзину</a>
                     </div>
                 @endforeach
             </div>
@@ -126,13 +143,15 @@ p.error-browser
                     <div class="content-product">
                         {{ $product->name }}
                         @foreach($product->pictures as $picture)
-                            <img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
+                            {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
+                            <img src="{{ env('S3_SITE', 'http://s3.eu-west-1.amazonaws.com/zrdesign/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
                         @endforeach
                     </div>
                     <div>
+                        <div>{{ $product->base_price * env('DOLLAR', '62') }}<br/>
                         <a href='#' id="addToCartButton{{ $product->id }}"
-                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">Добавить в
-                            корзину {{ $product->id }}</a>
+                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
+                            корзину</a>
                     </div>
                 @endforeach
             </div>
@@ -184,22 +203,6 @@ p.error-browser
         const model = document.getElementById(`model_${id}`);
 
         model.classList.add('active')
-    }
-</script>
-
-<script>
-    function addToCart(product) {
-        $.ajax({
-            type: 'POST',
-            url: '/cart/add/' + product,
-            success: function () {
-                $('#addToCartButton' + product).text('Товар добавлен в корзину')
-                setTimeout(() => {
-                    $('#addToCartButton' + product).text('Добавить в корзину')
-                }, 2000)
-            }
-        })
-        return false;
     }
 </script>
 

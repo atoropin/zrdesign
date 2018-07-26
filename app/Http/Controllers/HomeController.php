@@ -10,7 +10,7 @@ use App\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
+use File;
 
 class HomeController extends Controller
 {
@@ -23,8 +23,6 @@ class HomeController extends Controller
         $manufacturers = Suppliers::whereNotNull('type')->get();
 
         $brandData = $this->getCarBrandData();
-
-//        dd($brandData);
 
         $parameters = [];
 
@@ -49,6 +47,8 @@ class HomeController extends Controller
         $groups = $ProductsCollection['groups'];
         $manufacturers = $ProductsCollection['manufacturers'];
         $products = $ProductsCollection['products'];
+
+//        dd($groups);
 
         return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters'));
     }
@@ -110,6 +110,8 @@ class HomeController extends Controller
 
         $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody]);
 
+//        dd($ProductsCollection);
+
         return $ProductsCollection;
     }
 
@@ -118,16 +120,25 @@ class HomeController extends Controller
         return CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
     }
 
+    public function showImage($id, $size, $name)
+    {
+        $pathToFile = env('S3_SITE').'/'.$id.'/'.$size.'/'.$name;
+
+        try {
+            $image = File::get($pathToFile);
+        } catch (\Exception $e) {
+            dd($e);
+            abort(404);
+        }
+
+        return response()->file($pathToFile);
+    }
+
     public function getImage($id, $size, $name)
     {
         $imagePath = 'production/product_pictures/'.$id.'/'.$size.'/'.$name;
 
-        $image = Storage::disk('s3')->get($imagePath);
-
-        if ($image) {
-            return Image::make($image)->response('jpg');
-        } else
-            return 'No Image';
+        return Storage::disk('s3')->get($imagePath);
     }
 
 //    public function getProducts(Request $request)

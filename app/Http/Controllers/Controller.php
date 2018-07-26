@@ -12,8 +12,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    const DOLLAR = 58;
-
     private $session;
 
     protected $sessionHash;
