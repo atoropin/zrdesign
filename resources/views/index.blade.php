@@ -42,7 +42,7 @@ p.error-browser
                 $('#addToCartButton' + product).text('Товар добавлен в корзину')
                 setTimeout(() => {
                     $('#addToCartButton' + product).text('Добавить в корзину')
-                }, 2000)
+                }, 1000)
             }
         })
         return false;
