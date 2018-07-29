@@ -131,9 +131,9 @@ p.error-browser
                     <div class="content-product-info">
                         <div class="content-product-info-header">{{ $product->name }}</div>
                         <div class="content-product-info-price">{{ $product->base_price * env('DOLLAR', '62') }}<br/>
-                        <a href='#' id="addToCartButton{{ $product->id }}"
-                           onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
-                            корзину</a>
+                            <a href='#' id="addToCartButton{{ $product->id }}"
+                               onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
+                                корзину</a>
                         </div>
                     </div>
                 @endforeach
@@ -195,7 +195,21 @@ p.error-browser
 
         const menu = document.getElementById(`brand_${id}`);
         menu.classList.add('active')
+        window.localStorage.setItem('activeBrand', id)
     }
+
+    function getQueryStringParams(query) {
+        return query
+            ? (/^[?#]/.test(query) ? query.slice(1) : query)
+                .split('&')
+                .reduce((params, param) => {
+                        let [key, value] = param.split('=');
+                        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                        return params;
+                    }, {}
+                )
+            : {}
+    };
 
     function showModel(event, id) {
         const active = document.querySelector('.model__list.active')
@@ -205,8 +219,26 @@ p.error-browser
 
         const model = document.getElementById(`model_${id}`);
 
-        model.classList.add('active')
+        if(model) {
+            model.classList.add('active')
+            window.localStorage.setItem('activeModel', id)
+        }
     }
+
+    function restoreFromStorage() {
+        const activeModel = localStorage.getItem('activeModel');
+        const activeBrand = localStorage.getItem('activeBrand');
+        showBrand(null, activeBrand)
+        showModel(null, activeModel)
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+            const {body} = getQueryStringParams(window.location.search)
+
+            if (body) {
+                restoreFromStorage()
+            }
+    })
 </script>
 
 <!--+Menu-->

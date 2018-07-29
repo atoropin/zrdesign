@@ -1,3 +1,100 @@
+@font-face {
+    font-family: Bodoni;
+    src: url("../fonts/Bodoni/Bodoni.eot");
+    src: url("../fonts/Bodoni/Bodoni.eot?#iefix") format("embedded-opentype"), url("../fonts/Bodoni/Bodoni.woff") format("woff"), url("../fonts/Bodoni/Bodoni.ttf") format("truetype"), url("../fonts/Bodoni/Bodoni.svg#svgBodoni") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+.Bodoni {
+    font-family: Bodoni;
+}
+@font-face {
+    font-family: GothamPro;
+    src: url("../fonts/GothamPro/GothamProRegular.eot");
+    src: url("../fonts/GothamPro/GothamProRegular.eot?#iefix") format("embedded-opentype"), url("../fonts/GothamPro/GothamProRegular.woff") format("woff"), url("../fonts/GothamPro/GothamProRegular.ttf") format("truetype"), url("../fonts/GothamPro/GothamProRegular.svg#svgGothamPro") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: GothamPro;
+    src: url("../fonts/GothamPro/GothamProMediumItalic.eot");
+    src: url("../fonts/GothamPro/GothamProMediumItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/GothamPro/GothamProMediumItalic.woff") format("woff"), url("../fonts/GothamPro/GothamProMediumItalic.ttf") format("truetype"), url("../fonts/GothamPro/GothamProMediumItalic.svg#svgGothamPro") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: GothamPro;
+    src: url("../fonts/GothamPro/GothamProMediumItalic.eot");
+    src: url("../fonts/GothamPro/GothamProMediumItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/GothamPro/GothamProMediumItalic.woff") format("woff"), url("../fonts/GothamPro/GothamProMediumItalic.ttf") format("truetype"), url("../fonts/GothamPro/GothamProMediumItalic.svg#svgGothamPro") format("svg");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: GothamPro;
+    src: url("../fonts/GothamPro/GothamProBold.eot");
+    src: url("../fonts/GothamPro/GothamProBold.eot?#iefix") format("embedded-opentype"), url("../fonts/GothamPro/GothamProBold.woff") format("woff"), url("../fonts/GothamPro/GothamProBold.ttf") format("truetype"), url("../fonts/GothamPro/GothamProBold.svg#svgGothamPro") format("svg");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: GothamPro;
+    src: url("../fonts/GothamPro/GothamProBoldItalic.eot");
+    src: url("../fonts/GothamPro/GothamProBoldItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/GothamPro/GothamProBoldItalic.woff") format("woff"), url("../fonts/GothamPro/GothamProBoldItalic.ttf") format("truetype"), url("../fonts/GothamPro/GothamProBoldItalic.svg#svgGothamPro") format("svg");
+    font-weight: bold;
+    font-style: italic;
+}
+.GothamPro {
+    font-family: GothamPro;
+}
+@font-face {
+    font-family: OpinionPro;
+    src: url("../fonts/OpinionPro/OpinionProlight.eot");
+    src: url("../fonts/OpinionPro/OpinionProlight.eot?#iefix") format("embedded-opentype"), url("../fonts/OpinionPro/OpinionProlight.woff") format("woff"), url("../fonts/OpinionPro/OpinionProlight.ttf") format("truetype"), url("../fonts/OpinionPro/OpinionProlight.svg#svgOpinionPro") format("svg");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: OpinionPro;
+    src: url("../fonts/OpinionPro/OpinionProlightitalic.eot");
+    src: url("../fonts/OpinionPro/OpinionProlightitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/OpinionPro/OpinionProlightitalic.woff") format("woff"), url("../fonts/OpinionPro/OpinionProlightitalic.ttf") format("truetype"), url("../fonts/OpinionPro/OpinionProlightitalic.svg#svgOpinionPro") format("svg");
+    font-weight: 300;
+    font-style: italic;
+}
+.OpinionPro {
+    font-family: OpinionPro;
+}
+@font-face {
+    font-family: PTSans;
+    src: url("../fonts/PTSans/PTSans-regular.eot");
+    src: url("../fonts/PTSans/PTSans-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/PTSans/PTSans-regular.woff") format("woff"), url("../fonts/PTSans/PTSans-regular.ttf") format("truetype"), url("../fonts/PTSans/PTSans-regular.svg#svgPTSans") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: PTSans;
+    src: url("../fonts/PTSans/PTSans-italic.eot");
+    src: url("../fonts/PTSans/PTSans-italic.eot?#iefix") format("embedded-opentype"), url("../fonts/PTSans/PTSans-italic.woff") format("woff"), url("../fonts/PTSans/PTSans-italic.ttf") format("truetype"), url("../fonts/PTSans/PTSans-italic.svg#svgPTSans") format("svg");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: PTSans;
+    src: url("../fonts/PTSans/PTSans-bold.eot");
+    src: url("../fonts/PTSans/PTSans-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/PTSans/PTSans-bold.woff") format("woff"), url("../fonts/PTSans/PTSans-bold.ttf") format("truetype"), url("../fonts/PTSans/PTSans-bold.svg#svgPTSans") format("svg");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: PTSans;
+    src: url("../fonts/PTSans/PTSans-bold_italic.eot");
+    src: url("../fonts/PTSans/PTSans-bold_italic.eot?#iefix") format("embedded-opentype"), url("../fonts/PTSans/PTSans-bold_italic.woff") format("woff"), url("../fonts/PTSans/PTSans-bold_italic.ttf") format("truetype"), url("../fonts/PTSans/PTSans-bold_italic.svg#svgPTSans") format("svg");
+    font-weight: bold;
+    font-style: italic;
+}
+.PTSans {
+    font-family: PTSans;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -269,29 +366,42 @@ body, html {
 
 /*ul:after { clear: both; }*/
 
-.brand__list {
+.menu-hz .brand__list {
     max-height: 0;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     overflow: hidden;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .brand__list li {
+    font-family: GothamPro, sans-serif;
     padding: 0 20px;
     margin: 0;
     cursor: pointer;
 }
 
 .model__list li {
+    font-family: GothamPro, sans-serif;
     padding: 0 20px;
     margin: 0;
+}
+
+.model__list li a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .brand__list.active {
     max-height: 1000px;
 }
 
-.model__list {
+.menu-hz .model__list {
+    max-width: 1280px;
+    justify-content: center;
+    margin: 0 auto;
     max-height: 0;
     display: flex;
     flex-wrap: wrap;
