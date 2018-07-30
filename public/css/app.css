@@ -101,7 +101,8 @@ body, html {
     min-height: 100vh;
     height: 100%;
     font-family: Verdana, Arial, "Helvetica CY", Helvetica, "Nimbus Sans L", sans-serif;
-    background: #273d4b;
+    background: url("../img/backgrounds/main.jpg") 100px center no-repeat fixed;
+    background-size: cover;
     color: #ffffff;
 }
 
@@ -111,8 +112,8 @@ body, html {
     min-height: 100%;
     width: 100%;
     position: relative;
-    background: url("../img/backgrounds/main.jpg") 100px center no-repeat;
-    background-size: cover;
+    /*background: url("../img/backgrounds/main.jpg") 100px center no-repeat fixed;*/
+    /*background-size: cover;*/
 }
 .site-container > * {
     position: relative;
@@ -121,12 +122,12 @@ body, html {
 }
 .site-container:after {
     content: '';
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    background: url("../img/backgrounds/gradient.png") left center no-repeat;
+    background: url("../img/backgrounds/gradient.png") left center no-repeat fixed;
     background-size: cover;
     z-index: 5;
 }
@@ -238,7 +239,7 @@ body, html {
 }
 
 .menu-sup-content {
-    padding: 20px 50px 20px 50px;
+    margin: 20px 0 20px 0;
 }
 
 .menu-sup {
@@ -257,9 +258,10 @@ body, html {
 /*}*/
 
 .manufacturers {
-    width: 1000%;
+    width: 100%;
     padding: 20px 0;
     margin: 0;
+    text-align: center;
 }
 
 .manufacturers li {
@@ -267,6 +269,15 @@ body, html {
     padding: 0 50px;
     display: inline-block;
     transition: 100ms;
+    font-family: PTSans;
+}
+
+.manufacturers li:last-child {
+    margin: 0;
+}
+
+.manufacturers a {
+    color: #eeeeee;
 }
 
 /*.menu-sup li {*/
@@ -298,6 +309,7 @@ body, html {
 
 .menu-left ul {
     list-style-image: url("../img/lists/bullet.png");
+    padding: 0 20px 0 50px;
     color: #cccccc;
 }
 
@@ -310,7 +322,7 @@ body, html {
 }
 
 .content {
-    width: 75%;
+    width: 65%;
 }
 
 .carousel {

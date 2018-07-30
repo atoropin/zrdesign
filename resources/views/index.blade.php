@@ -17,10 +17,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <link href="favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?hash={{ rand(0, 10) }}">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/4.13.0/bodymovin.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
 <!--if lt IE 8
@@ -120,34 +124,40 @@ p.error-browser
             </div>
         </div>
         @isset($productsCarousel)
-            <div class="carousel">
-                @foreach($productsCarousel as $product)
-                    <div class="content-product">
-                        @foreach($product->pictures as $picture)
+            {{--<div class="carousel">--}}
+            {{--<div class="content">--}}
+                {{--@foreach($productsCarousel as $product)--}}
+                    {{--<div class="content-product">--}}
+                        {{--{{ $product->name }}--}}
+                        {{--<div class="owl-carousel owl-theme">--}}
+                            {{--@foreach($product->pictures as $picture)--}}
                             {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
-                            <img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
-                        @endforeach
-                    </div>
-                    <div class="content-product-info">
-                        <div class="content-product-info-header">{{ $product->name }}</div>
-                        <div class="content-product-info-price">{{ $product->base_price * env('DOLLAR', '62') }}<br/>
-                            <a href='#' id="addToCartButton{{ $product->id }}"
-                               onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
-                                корзину</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+                                {{--<div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}"></div>--}}
+                            {{--@endforeach--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="content-product-info">--}}
+                        {{--<div class="content-product-info-header">{{ $product->name }}</div>--}}
+                        {{--<div class="content-product-info-price">{{ $product->base_price * env('DOLLAR', '62') }}<br/>--}}
+                            {{--<a href='#' id="addToCartButton{{ $product->id }}"--}}
+                               {{--onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В--}}
+                                {{--корзину</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--@endforeach--}}
+            {{--</div>--}}
         @endisset
         @isset($products)
             <div class="content">
                 @foreach($products as $product)
                     <div class="content-product">
                         {{ $product->name }}
-                        @foreach($product->pictures as $picture)
-                            {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
-                            <img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">
-                        @endforeach
+                        <div class="owl-carousel owl-theme">
+                            @foreach($product->pictures as $picture)
+                                {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
+                                <div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}"></div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="content-product-info">
                         <div class="content-product-info-header">{{ $product->name }}</div>
@@ -163,9 +173,32 @@ p.error-browser
     </div>
 </div>
 
-<script src="assets/js/jquery-3.3.1.slim.min.js"></script>
+{{--<script src="js/jquery-3.3.1.slim.min.js"></script>--}}
 <!--script(src="assets/js/jquery.touchSwipe.min.js")-->
-<script src="assets/js/scripts.js"></script>
+<script src="js/scripts.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        $('.owl-carousel').owlCarousel({
+            loop:false,
+            margin:10,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:3
+                }
+            }
+        })
+    })
+
+</script>
+
 <script>
     window.brands = document.querySelectorAll('.brand__list')
     window.models = document.querySelectorAll('.model__list')
@@ -181,7 +214,7 @@ p.error-browser
         $(this).find('li').css('transform', 'translateX(' + l + 'px)');
     }
 
-    $('.manufacturers').mousemove(jsMenu)
+    // $('.manufacturers').mousemove(jsMenu)
 
     function showBrand(event, id) {
         const active = document.querySelector('.brand__list.active')
@@ -241,6 +274,5 @@ p.error-browser
     })
 </script>
 
-<!--+Menu-->
 </body>
 </html>
