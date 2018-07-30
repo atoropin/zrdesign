@@ -151,7 +151,7 @@ p.error-browser
             <div class="content">
                 @foreach($products as $product)
                     <div class="content-product">
-                        {{ $product->name }}
+                        <div class="content-product-info-header">{{ $product->name }}</div>
                         <div class="owl-carousel owl-theme">
                             @foreach($product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
@@ -160,11 +160,10 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-header">{{ $product->name }}</div>
-                        <div class="content-product-info-price">{{ $product->base_price * env('DOLLAR', '62') }}<br/>
-                            <a href='#' id="addToCartButton{{ $product->id }}"
-                               onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В
-                                корзину</a>
+                        <div class="content-product-info-price"><button>{{ $product->base_price * env('DOLLAR', '62') }} руб.</button></div>
+                        <div class="content-product-info-cart"><button><a href='#' id="addToCartButton{{ $product->id }}"
+                               onclick="addToCart({{ $product->id }}); return false" style="color: black; text-decoration: none">В
+                                    корзину</a></button>
                         </div>
                     </div>
                 @endforeach
