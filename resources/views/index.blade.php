@@ -178,15 +178,17 @@ p.error-browser
         @endisset
     </div>
     <div class="pagination">
-        @isset($prev)
-            <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
-        @else
-            <button class="pagination-button-false">Обратно</button>
-        @endisset
-        @isset($next)
-            <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $next])) }}">Дальше</a></button>
-        @else
-            <button class="pagination-button-false">Дальше</button>
+        @isset($products)
+            @isset($prev)
+                <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
+            @else
+                <button class="pagination-button-false">Обратно</button>
+            @endisset
+            @isset($next)
+                <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $next])) }}">Дальше</a></button>
+            @else
+                <button class="pagination-button-false">Дальше</button>
+            @endisset
         @endisset
     </div>
 </div>
