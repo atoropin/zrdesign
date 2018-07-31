@@ -66,7 +66,7 @@ class HomeController extends Controller
 
         $products = $products->forPage($page, $perPage);
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev'));
+        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems'));
     }
 
     public function getProducts($parameters)

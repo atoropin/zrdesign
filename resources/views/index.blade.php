@@ -178,7 +178,7 @@ p.error-browser
         @endisset
     </div>
     <div class="pagination">
-        @isset($products)
+        @if($totalItems > 0)
             @isset($prev)
                 <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
             @else
@@ -189,7 +189,7 @@ p.error-browser
             @else
                 <button class="pagination-button-false">Дальше</button>
             @endisset
-        @endisset
+        @endif
     </div>
 </div>
 
