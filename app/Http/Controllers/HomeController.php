@@ -31,6 +31,8 @@ class HomeController extends Controller
     {
         $parameters = $request->input();
 
+        $page = $request->input('page') ?: 1;
+
         if($request->input('body') == null) {
             $ProductsCollection = $this->getProducts($parameters);
         } else {
@@ -43,6 +45,8 @@ class HomeController extends Controller
         $groups = $ProductsCollection['groups'];
         $manufacturers = $ProductsCollection['manufacturers'];
         $products = $ProductsCollection['products'];
+
+//        $products = $products->forPage($page, 15);
 
         return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters'));
     }

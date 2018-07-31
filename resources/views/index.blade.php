@@ -88,7 +88,14 @@ p.error-browser
                 @foreach($brand->models as $model)
                     <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
-                            <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
+                            @isset($parameters['body'])
+                                @if($body->id == $parameters['body'])<li><b>{{ $body->name }}</b></li>
+                                @else
+                                <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
+                                @endif
+                                @else
+                                    <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
+                            @endisset
                         @endforeach
                     </ul>
                 @endforeach
@@ -100,7 +107,7 @@ p.error-browser
             <ul class="manufacturers">
                 @foreach($manufacturers as $manufacturer)
                     <li>
-                        <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ $manufacturer->name }}</a>
+                        <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                     </li>
                 @endforeach
             </ul>
@@ -155,7 +162,7 @@ p.error-browser
                         <div class="owl-carousel owl-theme">
                             @foreach($product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
-                                <div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}"></div>
+                                <div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
                             @endforeach
                         </div>
                     </div>
@@ -170,6 +177,10 @@ p.error-browser
             </div>
         @endisset
     </div>
+    {{--<div class="pagination">--}}
+        {{--<button><a href="">Назад</a></button>--}}
+        {{--<button><a href="">Вперед</a></button>--}}
+    {{--</div>--}}
 </div>
 
 {{--<script src="js/jquery-3.3.1.slim.min.js"></script>--}}
@@ -195,7 +206,6 @@ p.error-browser
             }
         })
     })
-
 </script>
 
 <script>
