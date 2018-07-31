@@ -316,6 +316,14 @@ body, html {
     width: 20%;
 }
 
+.menu-left-back {
+    padding: 0 0 20px 50px;
+}
+
+.menu-left-back a {
+    text-decoration: none;
+}
+
 .menu-left-content a {
     color: lightgray;
 }
@@ -327,6 +335,11 @@ body, html {
 .menu-left {
     display: flex;
     justify-content: left;
+}
+
+.menu-left a {
+    position: relative;
+    bottom: 5px;
 }
 
 .menu-left ul {
@@ -396,6 +409,28 @@ body, html {
 .pagination {
     padding: 50px 0;
     text-align: center;
+}
+
+.pagination-button-true {
+    background: #faa223;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.pagination-button-false {
+    background: rgba(24, 38, 47, 0.5);
+    color: lightgray;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.pagination a {
+    color: black;
+    text-decoration: none;
 }
 
 /*li ul { display: none; }*/

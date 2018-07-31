@@ -117,7 +117,7 @@ p.error-browser
         <div class="menu-left-content">
             @isset($parameters['body'])
                 <div class="menu-left-back">
-                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Полный список</a>
+                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $body->name }}</b></a>
                 </div>
             @endisset
             <div class="menu-left">
@@ -177,10 +177,18 @@ p.error-browser
             </div>
         @endisset
     </div>
-    {{--<div class="pagination">--}}
-        {{--<button><a href="">Назад</a></button>--}}
-        {{--<button><a href="">Вперед</a></button>--}}
-    {{--</div>--}}
+    <div class="pagination">
+        @isset($prev)
+            <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
+        @else
+            <button class="pagination-button-false">Обратно</button>
+        @endisset
+        @isset($next)
+            <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $next])) }}">Дальше</a></button>
+        @else
+            <button class="pagination-button-false">Дальше</button>
+        @endisset
+    </div>
 </div>
 
 {{--<script src="js/jquery-3.3.1.slim.min.js"></script>--}}

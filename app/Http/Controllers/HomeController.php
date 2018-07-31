@@ -46,9 +46,27 @@ class HomeController extends Controller
         $manufacturers = $ProductsCollection['manufacturers'];
         $products = $ProductsCollection['products'];
 
-//        $products = $products->forPage($page, 15);
+        $perPage = 15;
+        $totalItems = $products->count();
+        $lastPage = ceil($totalItems / $perPage); // Total Pages
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters'));
+        $next = null;
+        $prev = null;
+
+        if(!$page || $page == 1) {
+            $prev = null;
+        } else {
+            $prev = $page - 1;
+        }
+        if($page == $lastPage) {
+            $next = null;
+        } else {
+            $next = $page + 1;
+        }
+
+        $products = $products->forPage($page, $perPage);
+
+        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev'));
     }
 
     public function getProducts($parameters)
