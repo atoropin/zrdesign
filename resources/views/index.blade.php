@@ -45,7 +45,7 @@ p.error-browser
             success: function () {
                 $('#addToCartButton' + product).text('Товар добавлен в корзину')
                 setTimeout(() => {
-                    $('#addToCartButton' + product).text('Добавить в корзину')
+                    $('#addToCartButton' + product).text('В корзину')
                 }, 1000)
             }
         })
@@ -89,10 +89,11 @@ p.error-browser
                     <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
                             @isset($parameters['body'])
-                                @if($body->id == $parameters['body'])<li><b>{{ $body->name }}</b></li>
-                                @else
-                                <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
-                                @endif
+                                    @if($body->id == $parameters['body'])
+                                        <li><b>{{ $body->name }}</b></li>
+                                    @else
+                                        <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
+                                    @endif
                                 @else
                                     <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
                             @endisset
@@ -117,7 +118,7 @@ p.error-browser
         <div class="menu-left-content">
             @isset($parameters['body'])
                 <div class="menu-left-back">
-                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $body->name }}</b></a>
+                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $bodyName }}</b></a>
                 </div>
             @endisset
             <div class="menu-left">
@@ -178,7 +179,7 @@ p.error-browser
         @endisset
     </div>
     <div class="pagination">
-        @if($totalItems > 0)
+        @if(isset($totalItems) && $totalItems > 0)
             @isset($prev)
                 <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
             @else
@@ -285,11 +286,11 @@ p.error-browser
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-            const {body} = getQueryStringParams(window.location.search)
+        const {body} = getQueryStringParams(window.location.search)
 
-            if (body) {
-                restoreFromStorage()
-            }
+        if (body) {
+            restoreFromStorage()
+        }
     })
 </script>
 

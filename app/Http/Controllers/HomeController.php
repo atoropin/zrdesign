@@ -37,6 +37,7 @@ class HomeController extends Controller
             $ProductsCollection = $this->getProducts($parameters);
         } else {
             $ProductsCollection = $this->getBodyProducts($parameters);
+            $bodyName = $ProductsCollection['bodyName'];
 //            $carBodyInfo = $ProductsCollection['carBodyInfo'];
         }
 
@@ -66,7 +67,7 @@ class HomeController extends Controller
 
         $products = $products->forPage($page, $perPage);
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems'));
+        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName'));
     }
 
     public function getProducts($parameters)
@@ -117,14 +118,16 @@ class HomeController extends Controller
             ->findOrFail($bodyId);
 
         $products = $carBody->products;
+        $bodyName = $carBody->name;
 
         $products->groups = $groups;
         $products->manufacturers = $manufacturers;
         $products->pictures = $pictures;
 
+
 //        $carBodyInfo = collect(['id' => $carBody->id, 'brand' => $carBody->model->brand->name, 'model' => $carBody->model->name, 'name' => $carBody->name]);
 
-        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody]);
+        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody, 'bodyName' => $bodyName]);
 
         return $ProductsCollection;
     }
