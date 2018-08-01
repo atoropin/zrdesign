@@ -85,8 +85,6 @@ class HomeController extends Controller
 
         $cartCount = $this->cartCount;
 
-//        dd($carBodyInfo);
-
         return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName', 'cartCount', 'carBodyInfo'));
     }
 

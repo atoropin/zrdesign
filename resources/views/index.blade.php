@@ -231,14 +231,14 @@ p.error-browser
     <div class="pagination">
         @if(isset($totalItems) && $totalItems > 0)
             @isset($prev)
-                <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a></button>
+                <a class="pagination-button-true" href="{{ route('products', array_merge($parameters, ['page' => $prev])) }}">Обратно</a>
             @else
-                <button class="pagination-button-false">Обратно</button>
+                <span class="pagination-button-false">Обратно</span>
             @endisset
             @isset($next)
-                <button class="pagination-button-true"><a href="{{ route('products', array_merge($parameters, ['page' => $next])) }}">Дальше</a></button>
+                <a class="pagination-button-true" href="{{ route('products', array_merge($parameters, ['page' => $next])) }}">Дальше</a>
             @else
-                <button class="pagination-button-false">Дальше</button>
+                <span class="pagination-button-false">Дальше</span>
             @endisset
         @endif
     </div>
