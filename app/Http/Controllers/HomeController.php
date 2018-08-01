@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Product;
 use App\CarBody;
 use App\CarBrand;
@@ -12,6 +13,15 @@ use Illuminate\Support\Arr;
 
 class HomeController extends Controller
 {
+    private $cartCount;
+
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $this->cartCount = Cart::where('session_hash', $this->sessionHash)->count();
+    }
+
     public function index()
     {
         $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])->inRandomOrder()->take(3)->get();
@@ -24,7 +34,9 @@ class HomeController extends Controller
 
         $parameters = [];
 
-        return view('index', compact('productsCarousel', 'groups', 'manufacturers', 'brandData', 'parameters'));
+        $cartCount = $this->cartCount;
+
+        return view('index', compact('productsCarousel', 'groups', 'manufacturers', 'brandData', 'parameters', 'cartCount'));
     }
 
     public function products(Request $request)
@@ -67,7 +79,9 @@ class HomeController extends Controller
 
         $products = $products->forPage($page, $perPage);
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName'));
+        $cartCount = $this->cartCount;
+
+        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName', 'cartCount'));
     }
 
     public function getProducts($parameters)

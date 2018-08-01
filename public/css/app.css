@@ -219,6 +219,17 @@ body, html {
     justify-content: space-between;
 }
 
+.header-cart-button {
+    background: rgba(24, 38, 47, 0.5);
+    color: #faa223;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.8em;
+}
+
 .menu-hz-content {
     margin-bottom: 2px;
     /*padding-bottom: -10px;*/
@@ -282,6 +293,7 @@ body, html {
     display: inline-block;
     transition: 100ms;
     font-family: Bodoni;
+    font-weight: 400;
 }
 
 .manufacturers li:last-child {
@@ -310,6 +322,49 @@ body, html {
 
 .main-container {
     display: flex;
+}
+
+.cart-content {
+    width: 60%;
+}
+
+.cart-form {
+    margin: 0 20px 0 20px;
+    padding: 10px;
+    background-color: rgba(24, 38, 47, 0.7);
+}
+
+.cart-form input {
+    background: rgba(24, 38, 47, 0.5);
+    color: lightgray;
+    width: 50%;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+
+.cart-form textarea {
+    background: rgba(24, 38, 47, 0.5);
+    color: lightgray;
+    width: 50%;
+    height: 5em;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+
+.cart-form button {
+    background: #faa223;
+    color: black;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form-input {
+    padding-bottom: 20px;
 }
 
 .menu-left-content {
@@ -390,7 +445,7 @@ body, html {
     background: rgba(24, 38, 47, 0.5);
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
@@ -400,7 +455,7 @@ body, html {
     background: #faa223;
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
@@ -414,7 +469,7 @@ body, html {
 .pagination-button-true {
     background: #faa223;
     border: 2px solid lightgray;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
 }
@@ -423,7 +478,7 @@ body, html {
     background: rgba(24, 38, 47, 0.5);
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
 }

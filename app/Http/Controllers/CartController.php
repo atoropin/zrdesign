@@ -33,7 +33,7 @@ class CartController extends Controller
     {
         $total = 0;
 
-        $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer')->get();
+        $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer', 'product.pictures')->get();
 
         return view('cart')->with(compact('uCart', 'total'));
     }
@@ -52,6 +52,10 @@ class CartController extends Controller
 
     public function sendOrder(Request $request)
     {
+        $products = Cart::where('session_hash', $this->sessionHash)->get();
+
+        dd($products);
+
         //clear cart!!!
 
         $this->validate($request, [ 'name' => 'required', 'email' => 'required|email', 'message' => 'required' ]);
@@ -63,8 +67,8 @@ class CartController extends Controller
                 'user_message' => $request->get('message')
             ), function($message)
             {
-                $message->from('saquib.gt@gmail.com');
-                $message->to('saquib.rizwan@cloudways.com', 'Admin')->subject('Cloudways Feedback');
+                $message->from('no-reply@zrdesign.ru');
+                $message->to('admin@zrdesign.ru', 'Admin')->subject('New Order');
             });
 
         return back()->with('success', 'Thanks for contacting us!');

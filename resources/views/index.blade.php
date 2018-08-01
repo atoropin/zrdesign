@@ -59,6 +59,9 @@ p.error-browser
             <div class="header-logo">
                 <a class="logo" href="/"><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
             </div>
+            <div class="header-cart">
+                <a href="/cart" class="header-cart-button">Мои покупки @isset($cartCount){{ $cartCount }}@else 0 @endisset</a>
+            </div>
             <div class="header-brand-menu">
                 <ul>
                     @foreach ($brandData as $brand)
