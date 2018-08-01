@@ -25,6 +25,20 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
+    <link rel="stylesheet" href="css/photoswipe.css">
+
+    <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
+         In the folder of skin CSS file there are also:
+         - .png and .svg icons sprite,
+         - preloader.gif (for browsers that do not support CSS animations) -->
+    <link rel="stylesheet" href="css/default-skin.css">
+
+    <!-- Core JS file -->
+    <script src="js/photoswipe.js"></script>
+
+    <!-- UI JS file -->
+    <script src="js/photoswipe-ui-default.js"></script>
+
 </head>
 <body>
 <!--if lt IE 8
@@ -38,6 +52,23 @@ p.error-browser
 -->
 
 <script>
+    function createImageGallery(id, i) {
+        const items = $('#product_gallery_'+id)
+            .find('img')
+            .map((index, image) => ({
+            src: $(image).attr('src').replace('medium', 'original'),
+            w: image.clientWidth*4,
+            h: image.clientHeight*4
+        }))
+
+        var pswpElement = document.querySelectorAll('.pswp')[0];
+        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, {index: i});
+
+        gallery.init()
+
+
+    }
+
     function addToCart(product) {
         $.ajax({
             type: 'POST',
@@ -163,10 +194,10 @@ p.error-browser
                 @foreach($products as $product)
                     <div class="content-product">
                         <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>
-                        <div class="owl-carousel owl-theme">
+                        <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
                             @foreach($product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
-                                <div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
+                                <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
                             @endforeach
                         </div>
                     </div>
@@ -299,6 +330,71 @@ p.error-browser
         }
     })
 </script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
