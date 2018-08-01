@@ -437,6 +437,11 @@ body, html {
     margin: 0 0 10px 0;
 }
 
+.content-product-info-header a {
+    color: darkorange;
+    text-decoration: none;
+}
+
 .content-product-info-cart {
     margin-left: 15px;
 }

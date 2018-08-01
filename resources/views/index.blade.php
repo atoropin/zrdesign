@@ -162,13 +162,16 @@ p.error-browser
             <div class="content">
                 @foreach($products as $product)
                     <div class="content-product">
-                        <div class="content-product-info-header">{{ $product->name }}</div>
+                        <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>
                         <div class="owl-carousel owl-theme">
                             @foreach($product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
                                 <div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
                             @endforeach
                         </div>
+                    </div>
+                    <div class="content-product">
+                        {{ $product->description }}
                     </div>
                     <div class="content-product-info">
                         <div class="content-product-info-price"><button>{{ $product->base_price * env('DOLLAR', '62') }} руб.</button></div>
