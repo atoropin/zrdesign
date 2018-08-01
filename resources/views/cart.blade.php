@@ -65,7 +65,7 @@ p.error-browser
     <div class="main-container">
         <div class="menu-left-content">
             <div class="menu-left-back">
-                <a href="/">Вернуться обратно</a>
+                <button><a style="color: black;" href="/">Вернуться обратно</a></button>
             </div>
         </div>
         <div class="cart-content">
@@ -81,7 +81,7 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-price"><button>{{ ($item->product->base_price) * env('DOLLAR', '62') }} руб.</button></div>
+                        <div class="content-product-info-price"><button>{{ strrev(chunk_split(strrev($item->product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</button></div>
                         <div class="content-product-info-cart"><button><a href='#'
                                                                           onclick="removeFromCart({{ $item->id }}); return false" style="color: black; text-decoration: none">Удалить</a></button>
                         </div>

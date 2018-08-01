@@ -339,8 +339,10 @@ body, html {
     color: lightgray;
     width: 50%;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .cart-form textarea {
@@ -349,18 +351,22 @@ body, html {
     width: 50%;
     height: 5em;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .cart-form button {
     background: #faa223;
     color: black;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .form-input {
@@ -377,6 +383,16 @@ body, html {
 
 .menu-left-back a {
     text-decoration: none;
+}
+
+.menu-left-back button {
+    background: #faa223;
+    border: 2px solid lightgray;
+    padding: 8px 16px;
+    text-align: center;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .menu-left-content a {

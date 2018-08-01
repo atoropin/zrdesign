@@ -206,7 +206,7 @@ p.error-browser
                         {{ $product->description }}
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-price"><button>{{ $product->base_price * env('DOLLAR', '62') }} руб.</button></div>
+                        <div class="content-product-info-price"><button>{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</button></div>
                         <div class="content-product-info-cart"><button><a href='#' id="addToCartButton{{ $product->id }}"
                                onclick="addToCart({{ $product->id }}); return false" style="color: black; text-decoration: none">В
                                     корзину</a></button>
