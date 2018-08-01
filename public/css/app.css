@@ -422,7 +422,7 @@ body, html {
 .content-product {
     margin: 0 20px 0 20px;
     padding: 10px;
-    background-color: rgba(24, 38, 47, 0.7);
+    background-color: rgba(24, 38, 47, 0.75);
 }
 
 .content-product-info {
@@ -430,7 +430,7 @@ body, html {
     justify-content: flex-end;
     margin: 0 20px 50px 20px;
     padding: 10px;
-    background-color: rgba(24, 38, 47, 0.7);
+    background-color: rgba(24, 38, 47, 0.5);
 }
 
 .content-product-info-header {
@@ -446,24 +446,48 @@ body, html {
     margin-left: 15px;
 }
 
+/*.content-product-info-price button {*/
+    /*background: rgba(24, 38, 47, 0.5);*/
+    /*color: lightgray;*/
+    /*border: 2px solid lightgray;*/
+    /*border-radius: 10px;*/
+    /*padding: 8px 16px;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+/*}*/
+
 .content-product-info-price button {
     background: rgba(24, 38, 47, 0.5);
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
+
+/*.content-product-info-cart button {*/
+    /*background: #faa223;*/
+    /*color: lightgray;*/
+    /*border: 2px solid lightgray;*/
+    /*border-radius: 10px;*/
+    /*padding: 8px 16px;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+/*}*/
 
 .content-product-info-cart button {
     background: #faa223;
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .pagination {
@@ -474,18 +498,22 @@ body, html {
 .pagination-button-true {
     background: #faa223;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .pagination-button-false {
     background: rgba(24, 38, 47, 0.5);
     color: lightgray;
     border: 2px solid lightgray;
-    border-radius: 10px;
     padding: 8px 16px;
     text-align: center;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .pagination a {

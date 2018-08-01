@@ -19,6 +19,12 @@ class CartController extends Controller
         $cart->session_hash = $this->sessionHash;
         $cart->product_id = $productId;
         $cart->save();
+
+        $itemsCount = Cart::where('session_hash', $this->sessionHash)->count();
+
+        return response()->json([
+            'itemsCount' => $itemsCount
+        ]);
     }
 
     public function deleteFromCart($itemId)
@@ -26,29 +32,25 @@ class CartController extends Controller
         $item = Cart::where('session_hash', $this->sessionHash)->where('id', $itemId)->firstOrFail();
         $item->delete();
 
-        return redirect('cart');
+        $minusPrice = $item->product->base_price * env('DOLLAR', '62');;
+
+        return response()->json([
+            'minusPrice' => $minusPrice
+        ]);
     }
 
     public function viewCart()
     {
-        $total = 0;
-
         $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer', 'product.pictures')->get();
 
-        return view('cart')->with(compact('uCart', 'total'));
-    }
+        $totalPrice = 0;
+        foreach ($uCart as $item) {
+            $totalPrice += $item->product->base_price;
+        }
+        $totalPrice *= env('DOLLAR', '62');
 
-//    public function getFormData(Request $request)
-//    {
-//        $this->validate($request, [
-//            'name' => 'required',
-//            'email' => 'required|email'
-//        ]);
-//
-//        $this->sendOrder();
-//
-//        return back()->with('success', 'Thanks for contacting us!');
-//    }
+        return view('cart')->with(compact('uCart', 'totalPrice'));
+    }
 
     public function sendOrder(Request $request)
     {

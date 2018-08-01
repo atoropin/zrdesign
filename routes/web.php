@@ -15,6 +15,6 @@ Route::get('/products', ['as' => 'products', 'uses' => 'HomeController@products'
  */
 Route::get('/cart', 'CartController@viewCart');
 Route::post('/cart/add/{product}', 'CartController@addToCart');
-Route::get('/cart/delete/{item}', 'CartController@deleteFromCart');
+Route::post('/cart/delete/{item}', 'CartController@deleteFromCart');
 
 Route::post('/cart/send',  'CartController@sendOrder');

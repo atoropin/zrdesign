@@ -39,13 +39,15 @@ p.error-browser
 
 <script>
     function removeFromCart(item) {
-        const removeFromCartButton = document.getElementById('removeFromCartButton'+id)
+        const removeFromCartButton = document.getElementById('removeFromCartButton'+item)
 
         $.ajax({
             type: 'POST',
             url: '/cart/delete/' + item,
-            success: function () {
+            success: function (data) {
                 removeFromCartButton.remove()
+                var newPrice = data.minusPrice
+                $('#totalPrice').text('Общая стоимость: '+newPrice+' руб.')
             }
         })
         return false;
@@ -85,10 +87,9 @@ p.error-browser
                         </div>
                     </div>
                 </div>
-                <?php $total += ($item->product->base_price) * env('DOLLAR', '62'); ?>
             @endforeach
-            <div class="content-product-info">
-                Общая стоимость: {{ $total }} руб.
+            <div class="content-product-info" id="totalPrice">
+                Общая стоимость: {{ $totalPrice }} руб.
             </div>
             <div class="cart-form">
                 <form method="POST" action="/cart/send">

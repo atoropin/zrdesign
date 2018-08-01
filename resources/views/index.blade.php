@@ -73,11 +73,12 @@ p.error-browser
         $.ajax({
             type: 'POST',
             url: '/cart/add/' + product,
-            success: function () {
+            success: function (data) {
                 $('#addToCartButton' + product).text('Товар добавлен в корзину')
                 setTimeout(() => {
                     $('#addToCartButton' + product).text('В корзину')
                 }, 1000)
+                $('#cart').text('Мои покупки '+data.itemsCount)
             }
         })
         return false;
@@ -91,7 +92,7 @@ p.error-browser
                 <a class="logo" href="/"><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
             </div>
             <div class="header-cart">
-                <a href="/cart" class="header-cart-button">Мои покупки @isset($cartCount){{ $cartCount }}@else 0 @endisset</a>
+                <a href="/cart" class="header-cart-button" id="cart">Мои покупки @isset($cartCount){{ $cartCount }}@else 0 @endisset</a>
             </div>
             <div class="header-brand-menu">
                 <ul>
