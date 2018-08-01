@@ -46,8 +46,7 @@ p.error-browser
             url: '/cart/delete/' + item,
             success: function (data) {
                 removeFromCartButton.remove()
-                var newPrice = data.minusPrice
-                $('#totalPrice').text('Общая стоимость: '+newPrice+' руб.')
+                $('#totalPrice').text('Общая стоимость: '+data.totalPrice+' руб.')
             }
         })
         return false;

@@ -32,10 +32,15 @@ class CartController extends Controller
         $item = Cart::where('session_hash', $this->sessionHash)->where('id', $itemId)->firstOrFail();
         $item->delete();
 
-        $minusPrice = $item->product->base_price * env('DOLLAR', '62');;
+        $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer', 'product.pictures')->get();
+        $totalPrice = 0;
+        foreach ($uCart as $item) {
+            $totalPrice += $item->product->base_price;
+        }
+        $totalPrice *= env('DOLLAR', '62');
 
         return response()->json([
-            'minusPrice' => $minusPrice
+            'totalPrice' => $totalPrice
         ]);
     }
 
