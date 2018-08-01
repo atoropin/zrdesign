@@ -19,26 +19,15 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?hash={{ rand(0, 10) }}">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/photoswipe.css">
+    <link rel="stylesheet" href="css/default-skin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/4.13.0/bodymovin.js"></script>
     <script src="js/owl.carousel.min.js"></script>
+    <script src="js/photoswipe.js"></script>
+    <script src="js/photoswipe-ui-default.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-    <link rel="stylesheet" href="css/photoswipe.css">
-
-    <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
-         In the folder of skin CSS file there are also:
-         - .png and .svg icons sprite,
-         - preloader.gif (for browsers that do not support CSS animations) -->
-    <link rel="stylesheet" href="css/default-skin.css">
-
-    <!-- Core JS file -->
-    <script src="js/photoswipe.js"></script>
-
-    <!-- UI JS file -->
-    <script src="js/photoswipe-ui-default.js"></script>
-
 </head>
 <body>
 <!--if lt IE 8
@@ -65,8 +54,6 @@ p.error-browser
         var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, {index: i});
 
         gallery.init()
-
-
     }
 
     function addToCart(product) {
@@ -98,8 +85,13 @@ p.error-browser
                 <ul>
                     @foreach ($brandData as $brand)
                         <li>
+                            @if($brand->id == $carBodyInfo['brand_id'])
+                                <img onclick="showBrand(event, {{$brand->id}})" class="menu-img"
+                                                 src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/>
+                            @else
                             <a href="#"><img onclick="showBrand(event, {{$brand->id}})" class="menu-img"
                                              src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/></a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
@@ -111,7 +103,13 @@ p.error-browser
             @foreach ($brandData as $brand)
                 <ul id="brand_{{$brand->id}}" class="brand__list">
                     @foreach($brand->models as $model)
-                        <li onclick="showModel(event, {{$model->id}})">{{ $model->name }}</li>
+                        <li onclick="showModel(event, {{$model->id}})">
+                            @if($model->id == $carBodyInfo['model_id'])
+                                <b>{{ $model->name }}</b>
+                            @else
+                                {{ $model->name }}
+                            @endif
+                        </li>
                     @endforeach
                 </ul>
             @endforeach
@@ -123,15 +121,22 @@ p.error-browser
                 @foreach($brand->models as $model)
                     <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
-                            @isset($parameters['body'])
-                                    @if($body->id == $parameters['body'])
-                                        <li><b>{{ $body->name }}</b></li>
-                                    @else
-                                        <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
-                                    @endif
+                            <li>
+                                @if($body->id == $carBodyInfo['body_id'])
+                                    <b><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></b>
                                 @else
-                                    <li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>
-                            @endisset
+                                    <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
+                                @endif
+                            </li>
+                            {{--@isset($parameters['body'])--}}
+                                    {{--@if($body->id == $parameters['body'])--}}
+                                        {{--<li><b>{{ $body->name }}</b></li>--}}
+                                    {{--@else--}}
+                                        {{--<li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>--}}
+                                    {{--@endif--}}
+                                {{--@else--}}
+                                    {{--<li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>--}}
+                            {{--@endisset--}}
                         @endforeach
                     </ul>
                 @endforeach
@@ -143,7 +148,11 @@ p.error-browser
             <ul class="manufacturers">
                 @foreach($manufacturers as $manufacturer)
                     <li>
-                        <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                        @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
+                            <a style="color: orange" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                        @else
+                            <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                        @endif
                     </li>
                 @endforeach
             </ul>
@@ -160,7 +169,11 @@ p.error-browser
                 <ul>
                     @foreach($groups as $group)
                         <li>
-                            <a href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
+                            @if(isset($parameters['group']) && $group->id == $parameters['group'])
+                                <a style="color: orange" href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
+                            @else
+                                <a href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
@@ -206,10 +219,9 @@ p.error-browser
                         {{ $product->description }}
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-price"><button>{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</button></div>
-                        <div class="content-product-info-cart"><button><a href='#' id="addToCartButton{{ $product->id }}"
-                               onclick="addToCart({{ $product->id }}); return false" style="color: black; text-decoration: none">В
-                                    корзину</a></button>
+                        <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
+                        <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
+                               onclick="addToCart({{ $product->id }}); return false" style="color: black; text-decoration: none">В корзину</a>
                         </div>
                     </div>
                 @endforeach

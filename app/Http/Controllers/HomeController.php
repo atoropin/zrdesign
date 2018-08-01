@@ -36,7 +36,9 @@ class HomeController extends Controller
 
         $cartCount = $this->cartCount;
 
-        return view('index', compact('productsCarousel', 'groups', 'manufacturers', 'brandData', 'parameters', 'cartCount'));
+        $carBodyInfo = null;
+
+        return view('index', compact('productsCarousel', 'groups', 'manufacturers', 'brandData', 'parameters', 'cartCount', 'carBodyInfo'));
     }
 
     public function products(Request $request)
@@ -45,12 +47,14 @@ class HomeController extends Controller
 
         $page = $request->input('page') ?: 1;
 
+        $carBodyInfo = null;
+
         if($request->input('body') == null) {
             $ProductsCollection = $this->getProducts($parameters);
         } else {
             $ProductsCollection = $this->getBodyProducts($parameters);
             $bodyName = $ProductsCollection['bodyName'];
-//            $carBodyInfo = $ProductsCollection['carBodyInfo'];
+            $carBodyInfo = $ProductsCollection['carBodyInfo'];
         }
 
         $brandData = $this->getCarBrandData();
@@ -81,7 +85,9 @@ class HomeController extends Controller
 
         $cartCount = $this->cartCount;
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName', 'cartCount'));
+//        dd($carBodyInfo);
+
+        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName', 'cartCount', 'carBodyInfo'));
     }
 
     public function getProducts($parameters)
@@ -138,10 +144,9 @@ class HomeController extends Controller
         $products->manufacturers = $manufacturers;
         $products->pictures = $pictures;
 
+        $carBodyInfo = collect(['id' => $carBody->id, 'brand_id' => $carBody->model->brand->id, 'model_id' => $carBody->model->id, 'body_id' => $carBody->id]);
 
-//        $carBodyInfo = collect(['id' => $carBody->id, 'brand' => $carBody->model->brand->name, 'model' => $carBody->model->name, 'name' => $carBody->name]);
-
-        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody, 'bodyName' => $bodyName]);
+        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody, 'bodyName' => $bodyName, 'carBodyInfo' => $carBodyInfo]);
 
         return $ProductsCollection;
     }
