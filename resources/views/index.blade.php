@@ -61,7 +61,7 @@ p.error-browser
             type: 'POST',
             url: '/cart/add/' + product,
             success: function (data) {
-                $('#addToCartButton' + product).text('Товар добавлен в корзину')
+                $('#addToCartButton' + product).text('Добавлен в корзину!')
                 setTimeout(() => {
                     $('#addToCartButton' + product).text('В корзину')
                 }, 1000)
@@ -105,7 +105,7 @@ p.error-browser
                     @foreach($brand->models as $model)
                         <li onclick="showModel(event, {{$model->id}})">
                             @if($model->id == $carBodyInfo['model_id'])
-                                <b>{{ $model->name }}</b>
+                                <b style="text-decoration: underline #ca2d25;">{{ $model->name }}</b>
                             @else
                                 {{ $model->name }}
                             @endif
@@ -123,7 +123,7 @@ p.error-browser
                         @foreach($model->bodies as $body)
                             <li>
                                 @if($body->id == $carBodyInfo['body_id'])
-                                    <b><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></b>
+                                    <b><a style="text-decoration: underline #ca2d25;" href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></b>
                                 @else
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
@@ -149,7 +149,7 @@ p.error-browser
                 @foreach($manufacturers as $manufacturer)
                     <li>
                         @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
-                            <a style="color: orange" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                            <a style="text-decoration: underline #ca2d25;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                         @else
                             <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                         @endif
@@ -170,7 +170,7 @@ p.error-browser
                     @foreach($groups as $group)
                         <li>
                             @if(isset($parameters['group']) && $group->id == $parameters['group'])
-                                <a style="color: orange" href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
+                                <a style="text-decoration: underline #ca2d25;" href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
                             @else
                                 <a href="{{ route('products', array_merge($parameters, ['group' => $group->id])) }}">{{ $group->name }}</a>
                             @endif
@@ -181,23 +181,17 @@ p.error-browser
         </div>
         @isset($productsCarousel)
             {{--<div class="carousel">--}}
-            {{--<div class="content">--}}
                 {{--@foreach($productsCarousel as $product)--}}
-                    {{--<div class="content-product">--}}
-                        {{--{{ $product->name }}--}}
-                        {{--<div class="owl-carousel owl-theme">--}}
+                    {{--<div class="carousel-product">--}}
+                        {{--<div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>--}}
+                        {{--<div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">--}}
                             {{--@foreach($product->pictures as $picture)--}}
-                            {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
-                                {{--<div class="item"><img src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}"></div>--}}
+                                {{--<div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>--}}
                             {{--@endforeach--}}
                         {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="content-product-info">--}}
-                        {{--<div class="content-product-info-header">{{ $product->name }}</div>--}}
-                        {{--<div class="content-product-info-price">{{ $product->base_price * env('DOLLAR', '62') }}<br/>--}}
-                            {{--<a href='#' id="addToCartButton{{ $product->id }}"--}}
-                               {{--onclick="addToCart({{ $product->id }}); return false" style="color: yellow;">В--}}
-                                {{--корзину</a>--}}
+                        {{--<div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>--}}
+                        {{--<div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"--}}
+                                                                  {{--onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--@endforeach--}}
@@ -210,7 +204,6 @@ p.error-browser
                         <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>
                         <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
                             @foreach($product->pictures as $picture)
-                                {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
                                 <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
                             @endforeach
                         </div>
@@ -221,7 +214,7 @@ p.error-browser
                     <div class="content-product-info">
                         <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
                         <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
-                               onclick="addToCart({{ $product->id }}); return false" style="color: black; text-decoration: none">В корзину</a>
+                               onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>
                         </div>
                     </div>
                 @endforeach
@@ -242,6 +235,11 @@ p.error-browser
             @endisset
         @endif
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+            &copy;{{ \Carbon\Carbon::today()->format('Y') }} zrdesign.ru
+        </div>
+    </footer>
 </div>
 
 {{--<script src="js/jquery-3.3.1.slim.min.js"></script>--}}

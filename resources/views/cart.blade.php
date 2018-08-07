@@ -71,7 +71,7 @@ p.error-browser
             @foreach($uCart as $item)
                 <div id="removeFromCartButton{{ $item->id }}">
                     <div class="content-product">
-                        <div class="content-product-info-header">{{ $item->product->name }} <b>{{ $item->product->manufacturer->name }}</b></div>
+                        <div class="content-product-info-header">{{ $item->product->name }} <a href="{{ route('products', ['manufacturer' => $item->product->manufacturer->id]) }}">{{ mb_strtoupper($item->product->manufacturer->name) }}</a></div>
                         <div class="owl-carousel owl-theme">
                             @foreach($item->product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}
@@ -82,36 +82,41 @@ p.error-browser
                     <div class="content-product-info">
                         <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($item->product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
                         <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#'
-                                                                          onclick="removeFromCart({{ $item->id }}); return false" style="color: black; text-decoration: none">Удалить</a>
+                                                                          onclick="removeFromCart({{ $item->id }}); return false" style="text-decoration: none">Удалить</a>
                         </div>
                     </div>
                 </div>
             @endforeach
             <div class="content-product-info" id="totalPrice">
-                Общая стоимость: {{ $totalPrice }} руб.
+                <span class="content-product-info-price-button">Общая стоимость: {{ strrev(chunk_split(strrev($totalPrice), 3, ' ')) }} руб.</span>
             </div>
             <div class="cart-form">
                 <form method="POST" action="/cart/send">
                     {{ csrf_field() }}
                     <div class="form-input">
                         <label for="Name">Ваше имя: </label><br/>
-                        <input type="text" class="form-control" id="name" placeholder="Введите Ваше имя" name="name" required>
+                        <input type="text" id="name" placeholder="Введите Ваше имя" name="name" required>
                     </div>
                     <div class="form-input">
                         <label for="email">E-mail: </label><br/>
-                        <input type="text" class="form-control" id="email" placeholder="Введите Ваш E-mail" name="email" required>
+                        <input type="text" id="email" placeholder="Введите Ваш E-mail" name="email" required>
                     </div>
                     <div class="form-input">
                         <label for="message">Сообщение (необязательно): </label><br/>
-                        <textarea type="text" class="form-control luna-message" id="message" name="message"></textarea>
+                        <textarea type="text" id="message" name="message"></textarea>
                     </div>
                     <div class="form-input">
-                        <button type="submit" class="btn btn-primary" value="Send">Отправить заказ</button>
+                        <button type="submit" value="Send">Отправить заказ</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+            &copy;{{ \Carbon\Carbon::today()->format('Y') }} zrdesign.ru
+        </div>
+    </footer>
 </div>
 
 <script>
