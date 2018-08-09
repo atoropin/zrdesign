@@ -226,6 +226,7 @@ body, html {
     padding: 6px 12px;
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
     font-size: 0.9em;
     display: inline-block;
     -webkit-transform: skew(-10deg);
@@ -400,6 +401,7 @@ body, html {
     border: 2px solid lightgray;
     padding: 8px 16px;
     text-align: center;
+    white-space: nowrap;
     color: #ffffff;
     -webkit-transform: skew(-10deg);
     -moz-transform: skew(-10deg);
@@ -495,6 +497,7 @@ body, html {
     padding: 4px 16px;
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
     display: inline-block;
     -webkit-transform: skew(-10deg);
     -moz-transform: skew(-10deg);
@@ -508,6 +511,7 @@ body, html {
     padding: 4px 16px;
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
     display: inline-block;
     -webkit-transform: skew(-10deg);
     -moz-transform: skew(-10deg);
@@ -592,6 +596,7 @@ body, html {
     overflow: hidden;
     max-width: 1280px;
     margin: 0 auto;
+    white-space: nowrap;
 }
 
 .brand__list li {
