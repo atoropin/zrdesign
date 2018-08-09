@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendOrder;
 
 class CartController extends Controller
 {
@@ -59,25 +61,47 @@ class CartController extends Controller
 
     public function sendOrder(Request $request)
     {
-        $products = Cart::where('session_hash', $this->sessionHash)->get();
+        $cart = Cart::where('session_hash', $this->sessionHash)->get();
 
-        dd($products);
+        $productsIds = [];
+        foreach ($cart as $item) {
+            $productsIds[] = $item->product_id;
+        }
 
-        //clear cart!!!
+        $products = Product::with('manufacturer')->whereIn('id', $productsIds)->get()->keyBy('id')->toArray();
+        $cartItems = [];
+        foreach ($productsIds as $productsId) {
+            $cartItems[] = $products[$productsId];
+        }
 
-        $this->validate($request, [ 'name' => 'required', 'email' => 'required|email', 'message' => 'required' ]);
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item->product->base_price;
+        }
+        $totalPrice *= env('DOLLAR', '62');
 
-        Mail::send('email',
-            array(
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'user_message' => $request->get('message')
-            ), function($message)
-            {
-                $message->from('no-reply@zrdesign.ru');
-                $message->to('admin@zrdesign.ru', 'Admin')->subject('New Order');
-            });
+//        $this->validate($request, ['email' => 'required|email']);
 
-        return back()->with('success', 'Thanks for contacting us!');
+        $order = new \stdClass();
+        $order->date = date('d.m.Y H:i');
+        $order->items = $cartItems;
+        $order->name = $request->get('name');
+        $order->phone = $request->get('phone');
+        $order->email = $request->get('email');
+        $order->message = $request->get('message');
+        $order->total = $totalPrice;
+
+        try {
+            Mail::to("order@zrdesign.ru")->send(new SendOrder($order));
+        } catch (\Exception $exception) {
+            abort(404);
+        }
+
+        // Clearing cart after sending message
+        foreach ($cart as $item) {
+            $item->delete();
+        }
+
+        return redirect('/');
     }
 }

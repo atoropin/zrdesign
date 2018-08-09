@@ -94,12 +94,16 @@ p.error-browser
                 <form method="POST" action="/cart/send">
                     {{ csrf_field() }}
                     <div class="form-input">
-                        <label for="Name">Ваше имя: </label><br/>
-                        <input type="text" id="name" placeholder="Введите Ваше имя" name="name" required>
+                        <label for="name">Ваше имя: </label><br/>
+                        <input type="text" id="name" placeholder="Введите Ваше имя" name="name">
                     </div>
                     <div class="form-input">
-                        <label for="email">E-mail: </label><br/>
-                        <input type="text" id="email" placeholder="Введите Ваш E-mail" name="email" required>
+                        <label for="email">Телефон: </label><br/>
+                        <input type="text" id="phone" placeholder="Ваш телефон для связи" name="phone">
+                    </div>
+                    <div class="form-input">
+                        <label for="phone">E-mail: </label><br/>
+                        <input type="text" id="email" placeholder="Введите Ваш E-mail" name="email">
                     </div>
                     <div class="form-input">
                         <label for="message">Сообщение (необязательно): </label><br/>
