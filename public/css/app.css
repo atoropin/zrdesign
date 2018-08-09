@@ -222,8 +222,11 @@ body, html {
 .header-cart-button {
     background: rgba(24, 38, 47, 0.5);
     color: #cccccc;
-    border: 2px solid #ca2d25;;
-    padding: 6px 12px;
+    border-bottom: 1px solid #ca2d25;
+    border-right: 1px solid #ca2d25;
+    padding: 2px 12px;
+    margin-bottom: 10px;
+    margin-left: 20px;
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
