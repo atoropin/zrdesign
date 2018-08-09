@@ -210,6 +210,7 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product">
+                        <h3>{{ $product->id }}</h3>
                         {{ $product->description }}
                     </div>
                     <div class="content-product-info">

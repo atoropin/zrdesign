@@ -81,7 +81,7 @@ class HomeController extends Controller
             $next = $page + 1;
         }
 
-        $products = $products->forPage($page, $perPage);
+        $products = $products->sortByDesc('id')->forPage($page, $perPage);
 
         $cartCount = $this->cartCount;
 
@@ -100,7 +100,7 @@ class HomeController extends Controller
             ->when($groupId, function($query) use($groupId) {
                 $query->where('product_group_id', $groupId);
             })
-            ->get();
+            ->orderByDesc('id')->get();
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
