@@ -71,7 +71,7 @@ p.error-browser
             @foreach($uCart as $item)
                 <div id="removeFromCartButton{{ $item->id }}">
                     <div class="content-product">
-                        <div class="content-product-info-header">{{ $item->product->name }} <a href="{{ route('products', ['manufacturer' => $item->product->manufacturer->id]) }}">{{ mb_strtoupper($item->product->manufacturer->name) }}</a></div>
+                        <div class="content-product-info-header">{{ $item->product->name }} <a href="{{ route('products', ['manufacturer' => $item->product->manufacturer->id]) }}">{{ mb_strtoupper($item->product->manufacturer->name) }}</a> <small>{{ $item->product->art }}</small></div>
                         <div class="owl-carousel owl-theme">
                             @foreach($item->product->pictures as $picture)
                                 {{--<img src="/img/{{ $picture->id . '/thumb/' . $picture->picture_file_name }}">--}}

@@ -17,6 +17,7 @@
 <h3>Позиции:</h3>
 <table style="border-collapse: collapse; border: 1px solid #cccccc; width: 100%;">
     <tr style="border-collapse: collapse; border: 1px solid #eeeeee;">
+        <td><b>Артикул</b></td>
         <td><b>Наименование</b></td>
         <td><b>Производитель</b></td>
         <td><b>Цена (у.е.)</b></td>
@@ -24,6 +25,7 @@
     </tr>
     @foreach($order->items as $item)
         <tr style="border-collapse: collapse; border: 1px solid #eeeeee;">
+            <td>{{ $item['art'] }}</td>
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['manufacturer']['name'] }}</td>
             <td>{{ $item['base_price'] }}</td>

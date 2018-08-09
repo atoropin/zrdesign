@@ -202,7 +202,7 @@ p.error-browser
             <div class="content">
                 @foreach($products as $product)
                     <div class="content-product">
-                        <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>
+                        <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a> <small>{{ $product->art }}</small></div>
                         <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
                             @foreach($product->pictures as $picture)
                                 <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
@@ -210,7 +210,6 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product">
-                        <h3>{{ $product->id }}</h3>
                         {{ $product->description }}
                     </div>
                     <div class="content-product-info">
