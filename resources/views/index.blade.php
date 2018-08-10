@@ -210,7 +210,7 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product">
-                        {{ $product->description }}
+                        {!! nl2br($product->description) !!}
                     </div>
                     <div class="content-product-info">
                         <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
