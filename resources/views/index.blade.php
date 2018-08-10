@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="yandex-verification" content="32bdfc672f81d8db" />
     <link href="favicon.ico" rel="shortcut icon">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?hash={{ rand(0, 10) }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?hash={{ rand(0, 1000) }}">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/photoswipe.css">
