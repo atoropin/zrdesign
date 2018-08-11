@@ -28,7 +28,7 @@
             <td>{{ $item['art'] }}</td>
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['manufacturer']['name'] }}</td>
-            <td>@if($item['base_price'] == 0)-@else{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}) {{ $item['manufacturer']['currency']['exchange_rate'] }}@endif</td>
+            <td>@if($item['base_price'] == 0)-@else{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}, {{ $item['manufacturer']['currency']['exchange_rate'] }})@endif</td>
             <td>@if($item['base_price'] == 0)Цена по запросу@else{{ strrev(chunk_split(strrev($item['base_price'] * $item['manufacturer']['currency']['exchange_rate']), 3, ' ')) }}@endif</td>
         </tr>
     @endforeach
