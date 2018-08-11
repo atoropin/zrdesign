@@ -210,7 +210,7 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product">
-                        {{ $product->description }}
+                        {!! nl2br($product->description) !!}
                     </div>
                     <div class="content-product-info">
                         <div class="content-product-info-price"><span class="content-product-info-price-button">@isset($product->manufacturer->currency){{ strrev(chunk_split(strrev($product->base_price * $product->manufacturer->currency->exchange_rate), 3, ' ')) }} руб.@elseЦена по запросу@endisset</span></div>
