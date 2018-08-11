@@ -28,8 +28,8 @@
             <td>{{ $item['art'] }}</td>
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['manufacturer']['name'] }}</td>
-            <td>{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}) {{ $item['manufacturer']['currency']['exchange_rate'] }}</td>
-            <td>{{ strrev(chunk_split(strrev($item['base_price'] * $item['manufacturer']['currency']['exchange_rate']), 3, ' ')) }}</td>
+            <td>@if($item['base_price'] == 0)Цена по запросу ({{ $item['manufacturer']['currency']['code'] }})@else{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}) {{ $item['manufacturer']['currency']['exchange_rate'] }}@endif</td>
+            <td>@if($item['base_price'] == 0)Цена по запросу@else{{ strrev(chunk_split(strrev($item['base_price'] * $item['manufacturer']['currency']['exchange_rate']), 3, ' ')) }}@endif</td>
         </tr>
     @endforeach
     <tr style="border-collapse: collapse; border: 1px solid #eeeeee;">
