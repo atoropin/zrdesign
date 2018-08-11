@@ -20,7 +20,7 @@
         <td><b>Артикул</b></td>
         <td><b>Наименование</b></td>
         <td><b>Производитель</b></td>
-        <td><b>Цена (у.е.)</b></td>
+        <td><b>Цена (у.е.), Курс</b></td>
         <td><b>Цена (руб.)</b></td>
     </tr>
     @foreach($order->items as $item)
@@ -28,8 +28,8 @@
             <td>{{ $item['art'] }}</td>
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['manufacturer']['name'] }}</td>
-            <td>{{ $item['base_price'] }}</td>
-            <td>{{ strrev(chunk_split(strrev($item['base_price'] * env('DOLLAR', '62')), 3, ' ')) }}</td>
+            <td>{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}) {{ $item['manufacturer']['currency']['exchange_rate'] }}</td>
+            <td>{{ strrev(chunk_split(strrev($item['base_price'] * $item['manufacturer']['currency']['exchange_rate']), 3, ' ')) }}</td>
         </tr>
     @endforeach
     <tr style="border-collapse: collapse; border: 1px solid #eeeeee;">

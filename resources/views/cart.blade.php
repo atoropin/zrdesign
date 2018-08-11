@@ -80,15 +80,17 @@ p.error-browser
                         </div>
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($item->product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
+                        <div class="content-product-info-price"><span class="content-product-info-price-button">
+                                @isset($item->product->manufacturer->currency){{ strrev(chunk_split(strrev($item->product->base_price * $item->product->manufacturer->currency->exchange_rate), 3, ' ')) }} руб.@elseЦена по запросу@endisset
+                            </span></div>
                         <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#'
                                                                           onclick="removeFromCart({{ $item->id }}); return false" style="text-decoration: none">Удалить</a>
                         </div>
                     </div>
                 </div>
             @endforeach
-            <div class="content-product-info" id="totalPrice">
-                <span class="content-product-info-price-button">Общая стоимость: {{ strrev(chunk_split(strrev($totalPrice), 3, ' ')) }} руб.</span>
+            <div class="content-product-info">
+                <span class="content-product-info-price-button" id="totalPrice">Общая стоимость: {{ strrev(chunk_split(strrev($totalPrice), 3, ' ')) }} руб.</span>
             </div>
             <div class="cart-form">
                 <form method="POST" action="/cart/send">

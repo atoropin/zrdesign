@@ -37,12 +37,11 @@ class CartController extends Controller
         $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer', 'product.pictures')->get();
         $totalPrice = 0;
         foreach ($uCart as $item) {
-            $totalPrice += $item->product->base_price;
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
-        $totalPrice *= env('DOLLAR', '62');
 
         return response()->json([
-            'totalPrice' => $totalPrice
+            'totalPrice' => strrev(chunk_split(strrev($totalPrice), 3, ' '))
         ]);
     }
 
@@ -52,9 +51,8 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($uCart as $item) {
-            $totalPrice += $item->product->base_price;
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
-        $totalPrice *= env('DOLLAR', '62');
 
         return view('cart')->with(compact('uCart', 'totalPrice'));
     }
@@ -68,7 +66,7 @@ class CartController extends Controller
             $productsIds[] = $item->product_id;
         }
 
-        $products = Product::with('manufacturer')->whereIn('id', $productsIds)->get()->keyBy('id')->toArray();
+        $products = Product::with('manufacturer')->with('manufacturer.currency')->whereIn('id', $productsIds)->get()->keyBy('id')->toArray();
         $cartItems = [];
         foreach ($productsIds as $productsId) {
             $cartItems[] = $products[$productsId];
@@ -76,9 +74,8 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($cart as $item) {
-            $totalPrice += $item->product->base_price;
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
-        $totalPrice *= env('DOLLAR', '62');
 
 //        $this->validate($request, ['email' => 'required|email']);
 

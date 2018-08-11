@@ -8,7 +8,6 @@ use App\CarBody;
 use App\CarBrand;
 use App\ProductGroup;
 use App\Suppliers;
-use App\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -105,7 +104,7 @@ class HomeController extends Controller
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->get();
+        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->get();
 
         $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers]);
 
@@ -124,7 +123,7 @@ class HomeController extends Controller
                     $groups = $query->orderBy('name', 'asc')->get()->unique();
                 },
                 'products.manufacturer' => function($query) use (&$manufacturers) {
-                    $manufacturers = $query->orderBy('name', 'asc')->get()->unique();
+                    $manufacturers = $query->orderBy('name', 'asc')->with('currency')->get()->unique();
                 },
                 'products.pictures' => function($query) use (&$pictures) {
                     $pictures = $query->get();

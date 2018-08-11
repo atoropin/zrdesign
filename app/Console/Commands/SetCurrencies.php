@@ -3,9 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Suppliers;
-use Aws\Ec2\Exception\Ec2Exception;
 use Illuminate\Console\Command;
-use Mockery\Exception;
 
 class SetCurrencies extends Command
 {
