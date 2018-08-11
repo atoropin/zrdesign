@@ -11,8 +11,8 @@
 <!--[if gt IE 9]><!-->
 <html lang="ru"> <!--<![endif]-->
 <head>
-    <title></title>
-    <meta name="description" content="ZR Design">
+    <title>ZR Performance and Design</title>
+    <meta name="description" content="ZR Performance and Design">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <link href="favicon.ico" rel="shortcut icon">

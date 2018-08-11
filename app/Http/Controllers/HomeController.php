@@ -8,6 +8,7 @@ use App\CarBody;
 use App\CarBrand;
 use App\ProductGroup;
 use App\Suppliers;
+use App\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -28,7 +29,7 @@ class HomeController extends Controller
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->get();
+        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->get();
 
         $brandData = $this->getCarBrandData();
 

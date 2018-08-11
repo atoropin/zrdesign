@@ -11,8 +11,8 @@
 <!--[if gt IE 9]><!-->
 <html lang="ru"> <!--<![endif]-->
 <head>
-    <title></title>
-    <meta name="description" content="ZR Design">
+    <title>ZR Performance and Design</title>
+    <meta name="description" content="ZR Performance and Design">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="yandex-verification" content="32bdfc672f81d8db" />
@@ -213,7 +213,7 @@ p.error-browser
                         {{ $product->description }}
                     </div>
                     <div class="content-product-info">
-                        <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
+                        <div class="content-product-info-price"><span class="content-product-info-price-button">@isset($product->manufacturer->currency){{ strrev(chunk_split(strrev($product->base_price * $product->manufacturer->currency->exchange_rate), 3, ' ')) }} руб.@elseЦена по запросу@endisset</span></div>
                         <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
                                onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>
                         </div>
