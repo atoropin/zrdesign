@@ -25,8 +25,12 @@ class AddCurrencyIdToSuppliersTable extends Migration
      */
     public function down()
     {
-        Schema::table('suppliers', function (Blueprint $table) {
-            $table->dropColumn('currency_id');
-        });
+        if (Schema::hasColumn('suppliers', 'currency_id'))
+        {
+            Schema::table('suppliers', function (Blueprint $table)
+            {
+                $table->dropColumn('currency_id');
+            });
+        }
     }
 }
