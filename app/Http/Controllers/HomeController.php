@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->get();
+        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->orderBy('name', 'asc')->get();
 
         $brandData = $this->getCarBrandData();
 
@@ -104,7 +104,7 @@ class HomeController extends Controller
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->get();
+        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->orderBy('name', 'asc')->get();
 
         $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers]);
 
