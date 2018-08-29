@@ -413,6 +413,7 @@ body, html {
 
 .menu-left-content a {
     color: lightgray;
+    text-decoration: none;
 }
 
 .menu-left-content a:hover {
