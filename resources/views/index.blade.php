@@ -106,7 +106,7 @@ p.error-browser
                     @foreach($brand->models as $model)
                         <li onclick="showModel(event, {{$model->id}})">
                             @if($model->id == $carBodyInfo['model_id'])
-                                <span style="text-decoration: underline; text-decoration-color: #ca2d25;">{{ $model->name }}</span>
+                                <u style="text-decoration-color: #ca2d25;">{{ $model->name }}</u>
                             @else
                                 {{ $model->name }}
                             @endif
@@ -124,7 +124,7 @@ p.error-browser
                         @foreach($model->bodies as $body)
                             <li>
                                 @if($body->id == $carBodyInfo['body_id'])
-                                    <span style="text-decoration: underline; text-decoration-color: #ca2d25;">{{ $body->name }}</span>
+                                    <u style="text-decoration-color: #ca2d25;">{{ $body->name }}</u>
                                 @else
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
