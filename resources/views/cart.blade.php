@@ -59,6 +59,9 @@ p.error-browser
             <div class="header-logo">
                 <a class="logo" href="/"><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
             </div>
+            <div class="header-cart" style="padding-right: 50px;">
+                <a href="/cart" class="header-cart-button" id="cart">Мои покупки @isset($cartCount){{ $cartCount }}@else 0 @endisset</a>
+            </div>
         </div>
     </header>
     <div class="main-container">
