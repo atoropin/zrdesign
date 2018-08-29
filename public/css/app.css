@@ -155,29 +155,11 @@ body, html {
     body {
         font-size: 0.9em;
     }
-    .logo-image {
-        width: 325px;
-    }
-    .menu-img {
-        width: 50px;
-    }
-    .header-content {
-        height: 80px;
-    }
 }
 
 @media (max-width: 1200px) {
     body {
         font-size: 0.8em;
-    }
-    .logo-image {
-        width: 275px;
-    }
-    .menu-img {
-        width: 40px;
-    }
-    .header-content {
-        height: 70px;
     }
 }
 
@@ -185,21 +167,30 @@ body, html {
     body {
         font-size: 0.7em;
     }
-    .logo-image {
-        width: 225px;
-    }
-    .menu-img {
-        width: 24px;
-    }
-    .header-content {
-        height: 50px;
-    }
+}
+
+.header-content {
+    height: 7vw;
+}
+
+.logo-image {
+    width: 100%;
+}
+
+.menu-img {
+    max-width: 100%;
 }
 
 .header-brand-menu {
     position: relative;
     margin-right: 50px;
     margin-left: 50px;
+}
+
+.header-brand-menu ul {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 .header-brand-menu ul li {
