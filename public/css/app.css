@@ -106,6 +106,7 @@ body, html {
     background: url("../img/backgrounds/main.jpg") 100px center no-repeat fixed;
     background-size: cover;
     color: #ffffff;
+    font-size: 1vw;
 }
 
 .site-container {
@@ -151,34 +152,34 @@ body, html {
     margin-left: 50px;
 }
 
-@media (max-width: 1600px) {
-    body {
-        font-size: 0.9em;
-    }
-}
+/*@media (max-width: 1600px) {*/
+    /*body {*/
+        /*font-size: 0.9em;*/
+    /*}*/
+/*}*/
 
-@media (max-width: 1200px) {
-    body {
-        font-size: 0.8em;
-    }
-}
+/*@media (max-width: 1200px) {*/
+    /*body {*/
+        /*font-size: 0.8em;*/
+    /*}*/
+/*}*/
 
-@media (max-width: 1000px) {
-    body {
-        font-size: 0.7em;
-    }
-}
+/*@media (max-width: 1000px) {*/
+    /*body {*/
+        /*font-size: 0.7em;*/
+    /*}*/
+/*}*/
 
 .header-content {
-    height: 7vw;
+    height: 5vw;
 }
 
 .logo-image {
-    width: 100%;
+    width: 90%;
 }
 
 .menu-img {
-    max-width: 100%;
+    max-width: 90%;
 }
 
 .header-brand-menu {
@@ -258,7 +259,7 @@ body, html {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 10pt;
+    font-size: 0.8em;
 }
 
 .menu-hz li {
@@ -369,6 +370,7 @@ body, html {
     padding: 8px 16px;
     text-align: center;
     text-decoration: none;
+    font-size: 0.9em;
     -webkit-transform: skew(-10deg);
     -moz-transform: skew(-10deg);
     -o-transform: skew(-10deg);
