@@ -195,6 +195,7 @@ body, html {
 }
 
 .header-brand-menu ul li {
+    text-align: center;
     display: inline-block;
     padding-right: 20px;
     vertical-align: middle;
