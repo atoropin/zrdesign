@@ -28,11 +28,11 @@
             <td>{{ $item['art'] }}</td>
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['manufacturer']['name'] }}</td>
-            <td>@if($item['base_price'] == 0)-@else{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}, {{ (int)$item['manufacturer']['currency']['exchange_rate'] }})@endif</td>
-            <td>@if($item['base_price'] == 0)Цена по запросу@else{{ strrev(chunk_split(strrev($item['base_price'] * (int)$item['manufacturer']['currency']['exchange_rate']), 3, ' ')) }}@endif</td>
+            <td>@if($item['base_price'] == 0)-@else{{ $item['base_price'] }} ({{ $item['manufacturer']['currency']['code'] }}, {{ $item['manufacturer']['currency']['exchange_rate'] }})@endif</td>
+            <td>@if($item['base_price'] == 0)Цена по запросу@else{{ strrev(chunk_split(strrev(round($item['base_price'] * $item['manufacturer']['currency']['exchange_rate'])), 3, ' ')) }}@endif</td>
         </tr>
     @endforeach
     <tr style="border-collapse: collapse; border: 1px solid #eeeeee;">
-        <td colspan="4" style="text-align: right"><u>Общая стоимость:</u> {{ strrev(chunk_split(strrev((int)$order->total), 3, ' ')) }} руб.</td>
+        <td colspan="4" style="text-align: right"><u>Общая стоимость:</u> {{ strrev(chunk_split(strrev(round($order->total)), 3, ' ')) }} руб.</td>
     </tr>
 </table>

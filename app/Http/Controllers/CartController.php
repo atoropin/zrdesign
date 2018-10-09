@@ -37,11 +37,11 @@ class CartController extends Controller
         $uCart = Cart::where('session_hash', $this->sessionHash)->with('product.manufacturer', 'product.pictures')->get();
         $totalPrice = 0;
         foreach ($uCart as $item) {
-            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? (int)$item->product->manufacturer->currency->exchange_rate : 0);
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
 
         return response()->json([
-            'totalPrice' => strrev(chunk_split(strrev((int)$totalPrice), 3, ' '))
+            'totalPrice' => strrev(chunk_split(strrev($totalPrice), 3, ' '))
         ]);
     }
 
@@ -51,7 +51,7 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($uCart as $item) {
-            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? (int)$item->product->manufacturer->currency->exchange_rate : 0);
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
 
         return view('cart')->with(compact('uCart', 'totalPrice'));
@@ -74,7 +74,7 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($cart as $item) {
-            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? (int)$item->product->manufacturer->currency->exchange_rate : 0);
+            $totalPrice += $item->product->base_price * ($item->product->manufacturer->currency ? $item->product->manufacturer->currency->exchange_rate : 0);
         }
 
 //        $this->validate($request, ['email' => 'required|email']);
@@ -86,7 +86,7 @@ class CartController extends Controller
         $order->phone = $request->get('phone');
         $order->email = $request->get('email');
         $order->message = $request->get('message');
-        $order->total = (int)$totalPrice;
+        $order->total = $totalPrice;
 
         try {
             Mail::to("order@zrdesign.ru")->send(new SendOrder($order));
