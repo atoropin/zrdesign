@@ -46,9 +46,9 @@ p.error-browser
         const items = $('#product_gallery_'+id)
             .find('img')
             .map((index, image) => ({
-            src: $(image).attr('src').replace('medium', 'original'),
-            w: image.clientWidth*4,
-            h: image.clientHeight*4
+            src: $(image).attr('src'),
+            w: image.naturalWidth,
+            h: image.naturalHeight
         }))
 
         var pswpElement = document.querySelectorAll('.pswp')[0];
@@ -205,7 +205,7 @@ p.error-browser
                         <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a> <small>{{ $product->art }}</small></div>
                         <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
                             @foreach($product->pictures as $picture)
-                                <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
+                                <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/original/' . $picture->picture_file_name }}"></div>
                             @endforeach
                         </div>
                     </div>
