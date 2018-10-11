@@ -247,7 +247,7 @@ p.error-browser
     </div>
     <footer class="footer">
         <div class="footer-content">
-            &copy;{{ \Carbon\Carbon::today()->format('Y') }} zrdesign.ru
+            &copy;{{ \Carbon\Carbon::today()->format('Y') }} zrdesign.ru <a class="footer-link" href="mailto:order@zrdesign.ru">order@zrdesign.ru</a>
         </div>
     </footer>
 </div>

@@ -656,3 +656,7 @@ body, html {
     /*display: flex;*/
     /*flex-wrap: wrap;*/
 }
+
+.footer-link {
+    color: white;
+}
