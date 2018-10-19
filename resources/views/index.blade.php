@@ -113,9 +113,9 @@ p.error-browser
             @foreach ($brandData as $brand)
                 <ul id="brand_{{$brand->id}}" class="brand__list">
                     @foreach($brand->models as $model)
-                        <li onclick="showModel(event, {{$model->id}})">
+                        <li id="brand_item_{{$model->id}}" onclick="showModel(event, {{$model->id}})">
                             @if($model->id == $carBodyInfo['model_id'])
-                                <u style="text-decoration-color: #ca2d25; color: #ffffff;">{{ $model->name }}</u>
+                                <u class="_underline">{{ $model->name }}</u>
                             @else
                                 {{ $model->name }}
                             @endif
@@ -133,7 +133,7 @@ p.error-browser
                         @foreach($model->bodies as $body)
                             <li>
                                 @if($body->id == $carBodyInfo['body_id'])
-                                    <u style="text-decoration-color: #ca2d25; color: #ffffff;">{{ $body->name }}</u>
+                                    <u style="text-decoration: underline; text-decoration-color: #ca2d25; color: #ffffff!important; ">{{ $body->name }}</u>
                                 @else
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
@@ -306,6 +306,7 @@ p.error-browser
     function showBrand(event, id) {
         const active = document.querySelector('.brand__list.active')
         const activeModel = document.querySelector('.model__list.active')
+
         if (activeModel) {
             activeModel.classList.remove('active')
         }
@@ -333,6 +334,8 @@ p.error-browser
 
     function showModel(event, id) {
         const active = document.querySelector('.model__list.active')
+        document.querySelectorAll('._underline').forEach(u => u.classList.remove('_underline'))
+
         if (active) {
             active.classList.remove('active')
         }
@@ -340,6 +343,7 @@ p.error-browser
         const model = document.getElementById(`model_${id}`);
 
         if(model) {
+            document.querySelector('#brand_item_'+id).classList.add('_underline')
             model.classList.add('active')
             window.localStorage.setItem('activeModel', id)
         }

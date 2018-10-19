@@ -672,6 +672,10 @@ body, html {
     color: #ffffff;
 }
 
+.model__list_active {
+    color: #ffffff;
+}
+
 .brand__list.active {
     max-height: 1000px;
 }
@@ -694,4 +698,14 @@ body, html {
 
 .footer-link {
     color: white;
+}
+
+u {
+    text-decoration: none;
+}
+
+._underline {
+    text-decoration: underline;
+    text-decoration-color: #ca2d25;
+    color: #ffffff!important;
 }
