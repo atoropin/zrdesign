@@ -79,16 +79,6 @@ p.error-browser
             <div class="header-logo">
                 <a class="logo" href="/"><img class="logo-image" src="{{ asset('img/logo.png') }}"/></a>
             </div>
-            <table class="header-cart-table">
-                <tr>
-                    <td><img class="header-cart-image" src="img/shopping_cart.png"></td>
-                    <td><a href="/cart" class="header-cart-link" id="cart"><span>Мои покупки&nbsp;</span>@isset($cartCount){{ $cartCount }}@else 0 @endisset</a></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><small><a href="callto:89779508373" class="header-cart-link">+7 (977) 950-83-73</a></small></td>
-                </tr>
-            </table>
             <div class="header-brand-menu">
                 <ul>
                     @foreach ($brandData as $brand)
@@ -104,6 +94,18 @@ p.error-browser
                     @endforeach
                 </ul>
             </div>
+            <table class="header-cart-table">
+                <tr>
+                    <td><img class="header-cart-image" src="img/shopping_cart.png"></td>
+                    <td><a href="/cart" class="header-cart-link" id="cart"><span>Корзина&nbsp;</span>@isset($cartCount){{ $cartCount }}@else 0 @endisset</a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="display: flex">
+                        <small><a href="callto:89779508373" class="header-cart-link">+7 (977) 950-83-73</a></small><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
+                    </td>
+                </tr>
+            </table>
         </div>
     </header>
     <div class="menu-hz-content">
@@ -113,7 +115,7 @@ p.error-browser
                     @foreach($brand->models as $model)
                         <li onclick="showModel(event, {{$model->id}})">
                             @if($model->id == $carBodyInfo['model_id'])
-                                <u style="text-decoration-color: #ca2d25;">{{ $model->name }}</u>
+                                <u style="text-decoration-color: #ca2d25; color: #ffffff;">{{ $model->name }}</u>
                             @else
                                 {{ $model->name }}
                             @endif
@@ -131,7 +133,7 @@ p.error-browser
                         @foreach($model->bodies as $body)
                             <li>
                                 @if($body->id == $carBodyInfo['body_id'])
-                                    <u style="text-decoration-color: #ca2d25;">{{ $body->name }}</u>
+                                    <u style="text-decoration-color: #ca2d25; color: #ffffff;">{{ $body->name }}</u>
                                 @else
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
@@ -157,7 +159,7 @@ p.error-browser
                 @foreach($manufacturers as $manufacturer)
                     <li>
                         @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
-                            <a style="text-decoration: underline #ca2d25;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                            <a style="text-decoration: underline #ca2d25; color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                         @else
                             <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                         @endif
