@@ -102,7 +102,7 @@ p.error-browser
                 <tr>
                     <td></td>
                     <td style="display: flex">
-                        <small><a href="callto:89779508373" class="header-cart-link">+7 (977) 950-83-73</a></small><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
+                        <a href="callto:89779508373" class="header-cart-link">+7 (977) 950-83-73</a><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
                     </td>
                 </tr>
             </table>
