@@ -57,12 +57,12 @@ class UpdateCurrencies extends Command
         /** Getting USD currency */
         $client = new Client();
         $test = $client->get('http://free.currencyconverterapi.com/api/v5/convert?q=USD_RUB&compact=y')->getBody();
-        $res['USD'] = (json_decode($test)->USD_RUB->val)*1.03;
+        $res['USD'] = (json_decode($test)->USD_RUB->val)*1.02;
 
         /** Getting EUR currency */
         $client = new Client();
         $test = $client->get('http://free.currencyconverterapi.com/api/v5/convert?q=EUR_RUB&compact=y')->getBody();
-        $res['EUR'] = (json_decode($test)->EUR_RUB->val)*1.03;
+        $res['EUR'] = (json_decode($test)->EUR_RUB->val)*1.02;
 
         return $res;
     }

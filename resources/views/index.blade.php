@@ -66,7 +66,7 @@ p.error-browser
                 setTimeout(() => {
                     $('#addToCartButton' + product).text('В корзину')
                 }, 1000)
-                $('#cart').text('Мои покупки '+data.itemsCount)
+                $('#cart').text('Корзина '+data.itemsCount)
             }
         })
         return false;
@@ -189,6 +189,13 @@ p.error-browser
                 </ul>
             </div>
         </div>
+        @if( Session::has('success'))
+        <div class="carousel">
+            <div class="alert-success">
+                {{ Session::get('success') }}
+            </div>
+        </div>
+        @endif
         @isset($productsCarousel)
             {{--<div class="carousel">--}}
                 {{--@foreach($productsCarousel as $product)--}}

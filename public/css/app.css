@@ -152,6 +152,18 @@ body, html {
     margin-left: 50px;
 }
 
+.alert-success {
+    position: relative;
+    width: 100vw;
+    height: 100px;
+    align-items: center;
+    text-align: center;
+    line-height: 100px;
+    background: rgba(235, 30, 0, 0.5);
+    color: #ffffff;
+    font-size: 1em;
+}
+
 /*@media (max-width: 1600px) {*/
     /*body {*/
         /*font-size: 0.9em;*/

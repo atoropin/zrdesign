@@ -10,6 +10,7 @@ use App\ProductGroup;
 use App\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        if (Session::has('success')) {
+            Session::flash('success', 'Ваш заказ поступил в обработку!');
+        }
+
         $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])->inRandomOrder()->take(3)->get();
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();

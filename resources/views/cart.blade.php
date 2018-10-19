@@ -112,7 +112,7 @@ p.error-browser
                         <textarea type="text" id="message" name="message"></textarea>
                     </div>
                     <div class="form-input">
-                        <button type="submit" value="Send">Отправить заказ</button>
+                        <button type="submit" value="Send" @if($uCart->isEmpty()) disabled @endif>Отправить заказ</button>
                     </div>
                 </form>
             </div>

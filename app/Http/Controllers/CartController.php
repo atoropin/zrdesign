@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOrder;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
@@ -99,6 +100,6 @@ class CartController extends Controller
             $item->delete();
         }
 
-        return redirect('/');
+        return Redirect::to('/')->withSuccess('Message you want show in View');
     }
 }
