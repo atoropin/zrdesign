@@ -197,22 +197,22 @@ p.error-browser
         </div>
         @endif
         @isset($productsCarousel)
-            {{--<div class="carousel">--}}
-                {{--@foreach($productsCarousel as $product)--}}
-                    {{--<div class="carousel-product">--}}
-                        {{--<div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>--}}
-                        {{--<div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">--}}
-                            {{--@foreach($product->pictures as $picture)--}}
-                                {{--<div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>--}}
-                            {{--@endforeach--}}
-                        {{--</div>--}}
-                        {{--<div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>--}}
-                        {{--<div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"--}}
-                                                                  {{--onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
+            <div class="carousel">
+                @foreach($productsCarousel as $product)
+                    <div class="carousel-product">
+                        <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>
+                        <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
+                            @foreach($product->pictures as $picture)
+                                <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>
+                            @endforeach
+                        </div>
+                        <div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>
+                        <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
+                                                                  onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         @endisset
         @isset($products)
             <div class="content">

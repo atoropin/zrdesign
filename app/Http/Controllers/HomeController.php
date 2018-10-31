@@ -29,11 +29,17 @@ class HomeController extends Controller
             Session::flash('success', 'Ваш заказ поступил в обработку!');
         }
 
-        $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])->inRandomOrder()->take(3)->get();
+        $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->orderBy('name', 'asc')->get();
+        $manufacturers = Suppliers::whereNotNull('type')
+            ->with('currency')
+            ->orderBy('name', 'asc')
+            ->get();
 
         $brandData = $this->getCarBrandData();
 
@@ -43,7 +49,17 @@ class HomeController extends Controller
 
         $carBodyInfo = null;
 
-        return view('index', compact('productsCarousel', 'groups', 'manufacturers', 'brandData', 'parameters', 'cartCount', 'carBodyInfo'));
+        return view('index',
+            compact(
+                'productsCarousel',
+                'groups',
+                'manufacturers',
+                'brandData',
+                'parameters',
+                'cartCount',
+                'carBodyInfo'
+            )
+        );
     }
 
     public function products(Request $request)
@@ -90,7 +106,21 @@ class HomeController extends Controller
 
         $cartCount = $this->cartCount;
 
-        return view('index', compact('brandData', 'products', 'groups', 'manufacturers', 'parameters', 'next', 'prev', 'totalItems', 'bodyName', 'cartCount', 'carBodyInfo'));
+        return view('index',
+            compact(
+                'brandData',
+                'products',
+                'groups',
+                'manufacturers',
+                'parameters',
+                'next',
+                'prev',
+                'totalItems',
+                'bodyName',
+                'cartCount',
+                'carBodyInfo'
+            )
+        );
     }
 
     public function getProducts($parameters)
@@ -105,13 +135,21 @@ class HomeController extends Controller
             ->when($groupId, function($query) use($groupId) {
                 $query->where('product_group_id', $groupId);
             })
-            ->orderBy('id')->get();
+            ->orderBy('id')
+            ->get();
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
-        $manufacturers = Suppliers::whereNotNull('type')->with('currency')->orderBy('name', 'asc')->get();
+        $manufacturers = Suppliers::whereNotNull('type')
+            ->with('currency')
+            ->orderBy('name', 'asc')
+            ->get();
 
-        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers]);
+        $ProductsCollection = collect([
+            'products' => $products,
+            'groups' => $groups,
+            'manufacturers' => $manufacturers
+        ]);
 
         return $ProductsCollection;
     }
@@ -123,39 +161,93 @@ class HomeController extends Controller
         $bodyId = Arr::exists($parameters, 'body') ? $parameters['body'] : null;
 
         $carBody = CarBody::with([
-                'model.brand',
-                'products.group' => function($query) use (&$groups) {
-                    $groups = $query->orderBy('name', 'asc')->get()->unique();
-                },
-                'products.manufacturer' => function($query) use (&$manufacturers) {
-                    $manufacturers = $query->orderBy('name', 'asc')->with('currency')->get()->unique();
-                },
-                'products.pictures' => function($query) use (&$pictures) {
-                    $pictures = $query->get();
-                },
-                'products' => function($query) use ($manufacturerId, $groupId) {
-                    $manufacturerId ? $query->where('manufacturer_id', $manufacturerId)->get() : null;
-                    $groupId ? $query->where('product_group_id', $groupId)->get() : null;
-                }
-            ])
-            ->findOrFail($bodyId);
+            'model.brand',
+            'products.group' => function($query) use (&$groups) {
+                $groups = $query->orderBy('name', 'asc')
+                    ->get()
+                    ->unique();
+            },
+            'products.manufacturer' => function($query) use (&$manufacturers) {
+                $manufacturers = $query->orderBy('name', 'asc')
+                    ->with('currency')
+                    ->get()
+                    ->unique();
+            }])->findOrFail($bodyId);
 
-        $products = $carBody->products;
-        $bodyName = $carBody->name;
+        $products = Product::with('pictures')
+            ->whereHas('bodies', function($query) use($bodyId) {
+                $query->where('id', $bodyId);
+            })
+            ->when($manufacturerId, function($query) use($manufacturerId) {
+                $query->where('manufacturer_id', $manufacturerId);
+            })
+            ->when($groupId, function($query) use($groupId) {
+                $query->where('product_group_id', $groupId);
+            })
+            ->orderBy('id')
+            ->get();
 
-        $products->groups = $groups;
-        $products->manufacturers = $manufacturers;
-        $products->pictures = $pictures;
+        $carBodyInfo = collect([
+            'id' => $carBody->id,
+            'brand_id' => $carBody->model->brand->id,
+            'model_id' => $carBody->model->id,
+            'body_id' => $carBody->id
+        ]);
 
-        $carBodyInfo = collect(['id' => $carBody->id, 'brand_id' => $carBody->model->brand->id, 'model_id' => $carBody->model->id, 'body_id' => $carBody->id]);
-
-        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody, 'bodyName' => $bodyName, 'carBodyInfo' => $carBodyInfo]);
+        $ProductsCollection = collect([
+            'products' => $products,
+            'groups' => $groups,
+            'manufacturers' => $manufacturers,
+            'carBody' => $carBody,
+            'bodyName' => $carBody->name,
+            'carBodyInfo' => $carBodyInfo
+        ]);
 
         return $ProductsCollection;
     }
 
+//    public function _getBodyProducts($parameters)
+//    {
+//        $manufacturerId = Arr::exists($parameters, 'manufacturer') ? $parameters['manufacturer'] : null;
+//        $groupId = Arr::exists($parameters, 'group') ? $parameters['group'] : null;
+//        $bodyId = Arr::exists($parameters, 'body') ? $parameters['body'] : null;
+//
+//        $carBody = CarBody::with([
+//                'model.brand',
+//                'products.group' => function($query) use (&$groups) {
+//                    $groups = $query->orderBy('name', 'asc')->get()->unique();
+//                },
+//                'products.manufacturer' => function($query) use (&$manufacturers) {
+//                    $manufacturers = $query->orderBy('name', 'asc')->with('currency')->get()->unique();
+//                },
+//                'products.pictures' => function($query) use (&$pictures) {
+//                    $pictures = $query->get();
+//                },
+//                'products' => function($query) use ($manufacturerId, $groupId) {
+//                    $manufacturerId ? $query->where('manufacturer_id', $manufacturerId)->get() : null;
+//                    $groupId ? $query->where('product_group_id', $groupId)->get() : null;
+//                }
+//            ])
+//            ->findOrFail($bodyId);
+//
+//        $products = $carBody->products;
+//        $bodyName = $carBody->name;
+//
+//        $products->groups = $groups;
+//        $products->manufacturers = $manufacturers;
+//        $products->pictures = $pictures;
+//
+//        $carBodyInfo = collect(['id' => $carBody->id, 'brand_id' => $carBody->model->brand->id, 'model_id' => $carBody->model->id, 'body_id' => $carBody->id]);
+//
+//        $ProductsCollection = collect(['products' => $products, 'groups' => $groups, 'manufacturers' => $manufacturers, 'carBody' => $carBody, 'bodyName' => $bodyName, 'carBodyInfo' => $carBodyInfo]);
+//
+//        return $ProductsCollection;
+//    }
+
     public function getCarBrandData()
     {
-        return CarBrand::with('models.bodies')->orderBy('name', 'asc')->get();
+        return CarBrand::with('models.bodies')
+            ->orderBy('name', 'asc')
+            ->get();
     }
 }
