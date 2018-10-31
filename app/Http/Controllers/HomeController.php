@@ -106,6 +106,8 @@ class HomeController extends Controller
 
         $cartCount = $this->cartCount;
 
+        unset($parameters['page']);
+
         return view('index',
             compact(
                 'brandData',
