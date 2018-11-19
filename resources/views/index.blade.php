@@ -168,13 +168,13 @@ p.error-browser
     @endisset
     <div class="main-container">
         <div class="menu-left-content">
-            @isset($parameters['body'])
-                <div class="menu-left-back">
-                    <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $bodyName }}</b></a>
-                </div>
-            @endisset
             <div class="menu-left">
                 <ul>
+                    @isset($parameters['body'])
+                        <li class="menu-left-back">
+                            <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $bodyName }}</b></a>
+                        </li>
+                    @endisset
                     @foreach($groups as $group)
                         <li>
                             @if(isset($parameters['group']) && $group->id == $parameters['group'])

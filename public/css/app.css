@@ -487,10 +487,14 @@ body, html {
 
 .menu-left-content {
     width: 20%;
+    height: 75vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
 }
 
 .menu-left-back {
-    padding: 0 0 20px 50px;
+
 }
 
 .menu-left-back a {
@@ -545,6 +549,7 @@ body, html {
 .content {
     width: 60%;
     height: 100%;
+    padding-left: 20%;
 }
 
 .carousel {
