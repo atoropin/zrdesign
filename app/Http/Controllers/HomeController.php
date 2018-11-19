@@ -41,6 +41,8 @@ class HomeController extends Controller
             ->orderBy('name', 'asc')
             ->get();
 
+        $allManufacturers = $manufacturers;
+
         $brandData = $this->getCarBrandData();
 
         $parameters = [];
@@ -53,6 +55,7 @@ class HomeController extends Controller
             compact(
                 'productsCarousel',
                 'groups',
+                'allManufacturers',
                 'manufacturers',
                 'brandData',
                 'parameters',
@@ -79,6 +82,10 @@ class HomeController extends Controller
         }
 
         $brandData = $this->getCarBrandData();
+
+        $allManufacturers = Suppliers::whereNotNull('type')
+            ->orderBy('name', 'asc')
+            ->get();
 
         $groups = $ProductsCollection['groups'];
         $manufacturers = $ProductsCollection['manufacturers'];
@@ -113,6 +120,7 @@ class HomeController extends Controller
                 'brandData',
                 'products',
                 'groups',
+                'allManufacturers',
                 'manufacturers',
                 'parameters',
                 'next',

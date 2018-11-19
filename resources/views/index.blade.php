@@ -148,23 +148,23 @@ p.error-browser
         </div>
     </div>
     @isset($parameters['body'])
-    <div class="menu-hz-content">
-        <div class="menu-man-content">
-            <div class="menu-man">
-                <ul class="manufacturers-hz">
-                    @foreach($manufacturers as $manufacturer)
-                        <li>
-                            @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
-                                <a style="text-decoration: underline #ca2d25; color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
-                            @else
-                                <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
+        <div class="menu-hz-content">
+            <div class="menu-man-content">
+                <div class="menu-man">
+                    <ul class="manufacturers-hz">
+                        @foreach($manufacturers as $manufacturer)
+                            <li>
+                                @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
+                                    <a style="text-decoration: underline #ca2d25; color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                                @else
+                                    <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     @endisset
     <div class="main-container">
         <div class="menu-left-content">
@@ -247,7 +247,7 @@ p.error-browser
         <div class="menu-sup-content">
             <div class="menu-sup">
                 <ul class="manufacturers">
-                    @foreach($manufacturers as $manufacturer)
+                    @foreach($allManufacturers as $manufacturer)
                         <li>
                             @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
                                 <a style="color: #ca2d25;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
