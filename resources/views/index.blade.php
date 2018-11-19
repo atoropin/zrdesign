@@ -136,7 +136,7 @@ p.error-browser
                         @foreach($model->bodies as $body)
                             <li>
                                 @if($body->id == $carBodyInfo['body_id'])
-                                    <u style="text-decoration: underline; text-decoration-color: #ca2d25; color: #ffffff!important; ">{{ $body->name }}</u>
+                                    <u style="color: #ffffff!important; ">{{ $body->name }}</u>
                                 @else
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
@@ -155,7 +155,7 @@ p.error-browser
                         @foreach($manufacturers as $manufacturer)
                             <li>
                                 @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
-                                    <a style="text-decoration: underline #ca2d25; color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                                    <a style="color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                                 @else
                                     <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                                 @endif
