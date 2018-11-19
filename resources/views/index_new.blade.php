@@ -185,29 +185,22 @@ p.error-browser
             </div>
         @endif
         @isset($productsCarousel)
-            <div class="content">
-                @foreach($productsCarousel as $product)
-                    <div class="content-product">
-                        <div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a> <small>{{ $product->art }}</small></div>
-                        <div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">
-                            @foreach($product->pictures as $picture)
-                                <div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/original/' . $picture->picture_file_name }}"></div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="content-product">
-                        {!! nl2br($product->description) !!}
-                    </div>
-                    <div class="content-product-info">
-                        <div class="content-product-info-price"><span class="content-product-info-price-button">
-                                @isset($product->manufacturer->currency){{ strrev(chunk_split(strrev(round($product->base_price * $product->manufacturer->currency->exchange_rate)), 3, ' ')) }} руб.@elseЦена по запросу@endisset
-                            </span></div>
-                        <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
-                                                                  onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            {{--<div class="carousel">--}}
+            {{--@foreach($productsCarousel as $product)--}}
+            {{--<div class="carousel-product">--}}
+            {{--<div class="content-product-info-header">{{ $product->name }} <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $product->manufacturer->id])) }}">{{ mb_strtoupper($product->manufacturer->name) }}</a></div>--}}
+            {{--<div class="owl-carousel owl-theme" id="product_gallery_{{$product->id}}">--}}
+            {{--@foreach($product->pictures as $picture)--}}
+            {{--<div class="item"><img style="cursor: pointer" onclick="createImageGallery({{$product->id}}, {{$loop->index}})" src="{{ env('S3_SITE', 'https://s3-ap-southeast-1.amazonaws.com/zrdesigndb/production/product_pictures') }}/{{ $picture->id . '/medium/' . $picture->picture_file_name }}"></div>--}}
+            {{--@endforeach--}}
+            {{--</div>--}}
+            {{--<div class="content-product-info-price"><span class="content-product-info-price-button">{{ strrev(chunk_split(strrev($product->base_price * env('DOLLAR', '62')), 3, ' ')) }} руб.</span></div>--}}
+            {{--<div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"--}}
+            {{--onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--@endforeach--}}
+            {{--</div>--}}
         @endisset
         @isset($products)
             <div class="content">
@@ -299,36 +292,29 @@ p.error-browser
 <script>
     window.brands = document.querySelectorAll('.brand__list')
     window.models = document.querySelectorAll('.model__list')
-
     function jsMenu(e) {
         var totalWidth = 0;
         $(this).find('li').each(function (i) {
             totalWidth += parseInt($(this).outerWidth(), 10)
         });
-
         // Find the cursor ratio and position the menu
         var l = (window.innerWidth - totalWidth) * e.pageX / (window.innerWidth - 20);
         $(this).find('li').css('transform', 'translateX(' + l + 'px)');
     }
-
     // $('.manufacturers').mousemove(jsMenu)
-
     function showBrand(event, id) {
         const active = document.querySelector('.brand__list.active')
         const activeModel = document.querySelector('.model__list.active')
-
         if (activeModel) {
             activeModel.classList.remove('active')
         }
         if (active) {
             active.classList.remove('active')
         }
-
         const menu = document.getElementById(`brand_${id}`);
         menu.classList.add('active')
         window.localStorage.setItem('activeBrand', id)
     }
-
     function getQueryStringParams(query) {
         return query
             ? (/^[?#]/.test(query) ? query.slice(1) : query)
@@ -341,34 +327,27 @@ p.error-browser
                 )
             : {}
     };
-
     function showModel(event, id) {
         const active = document.querySelector('.model__list.active')
-        document.querySelectorAll('._underline').forEach(u => u.classList.remove('_underline'))
-
+        document.querySelectorAll('._activeColor').forEach(u => u.classList.remove('_activeColor'))
         if (active) {
             active.classList.remove('active')
         }
-
         const model = document.getElementById(`model_${id}`);
-
         if(model) {
-            document.querySelector('#brand_item_'+id).classList.add('_underline')
+            document.querySelector('#brand_item_'+id).classList.add('_activeColor')
             model.classList.add('active')
             window.localStorage.setItem('activeModel', id)
         }
     }
-
     function restoreFromStorage() {
         const activeModel = localStorage.getItem('activeModel');
         const activeBrand = localStorage.getItem('activeBrand');
         showBrand(null, activeBrand)
         showModel(null, activeModel)
     }
-
     document.addEventListener('DOMContentLoaded', function () {
         const {body} = getQueryStringParams(window.location.search)
-
         if (body) {
             restoreFromStorage()
         }

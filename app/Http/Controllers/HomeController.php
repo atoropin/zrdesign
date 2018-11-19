@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])
             ->inRandomOrder()
-            ->take(3)
+            ->take(10)
             ->get();
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
