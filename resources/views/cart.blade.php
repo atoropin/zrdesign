@@ -61,9 +61,9 @@ p.error-browser
             </div>
         </div>
     </header>
-    <div class="main-container">
-        <div class="menu-left-content">
-            <div class="menu-left-back">
+    <div class="main-cart-container">
+        <div class="menu-cart-content">
+            <div class="menu-cart-back">
                 <a class="content-product-info-price-button" href="/">Вернуться обратно</a>
             </div>
         </div>

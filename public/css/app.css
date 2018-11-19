@@ -441,6 +441,10 @@ body, html {
     margin-top: 20px;
 }
 
+.main-cart-container {
+    display: flex;
+}
+
 .cart-content {
     width: 60%;
     padding-bottom: 50px;
@@ -486,12 +490,36 @@ body, html {
     padding-bottom: 20px;
 }
 
+.menu-cart-content {
+    width: 20%;
+}
+
 .menu-left-content {
     width: 20%;
     height: 75vh;
     position: fixed;
     display: flex;
     align-items: center;
+}
+
+.menu-cart-back {
+    padding: 0 0 20px 50px;
+}
+
+.menu-cart-back a {
+    text-decoration: none;
+}
+
+.menu-cart-back button {
+    background: #ca2d25;
+    border: 2px solid lightgray;
+    padding: 8px 16px;
+    text-align: center;
+    white-space: nowrap;
+    color: #ffffff;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
 }
 
 .menu-left-back {
