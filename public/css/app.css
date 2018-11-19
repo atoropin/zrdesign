@@ -348,6 +348,7 @@ body, html {
 
 .menu-man {
     width: 90%;
+    margin: auto;
     overflow: hidden;
 }
 
