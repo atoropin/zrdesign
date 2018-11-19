@@ -141,21 +141,31 @@ p.error-browser
                                     <a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a>
                                 @endif
                             </li>
-                            {{--@isset($parameters['body'])--}}
-                            {{--@if($body->id == $parameters['body'])--}}
-                            {{--<li><b>{{ $body->name }}</b></li>--}}
-                            {{--@else--}}
-                            {{--<li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>--}}
-                            {{--@endif--}}
-                            {{--@else--}}
-                            {{--<li><a href="{{ route('products', ['body' => $body->id]) }}">{{ $body->name }}</a></li>--}}
-                            {{--@endisset--}}
                         @endforeach
                     </ul>
                 @endforeach
             @endforeach
         </div>
     </div>
+    @isset($parameters['body'])
+    <div class="menu-hz-content">
+        <div class="menu-man-content">
+            <div class="menu-man">
+                <ul class="manufacturers-hz">
+                    @foreach($manufacturers as $manufacturer)
+                        <li>
+                            @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
+                                <a style="text-decoration: underline #ca2d25; color: #ffffff;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                            @else
+                                <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+    @endisset
     <div class="main-container">
         <div class="menu-left-content">
             @isset($parameters['body'])
