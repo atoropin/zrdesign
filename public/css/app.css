@@ -373,7 +373,8 @@ body, html {
     width: 100%;
     display: inline-block;
     transition: 100ms;
-    font-family: Bodoni;
+    font-family: GothamPro, sans-serif;
+    font-size: 0.9vw;
     font-weight: 400;
     display: flex;
     justify-content: flex-end;
