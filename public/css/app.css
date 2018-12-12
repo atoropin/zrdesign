@@ -387,7 +387,6 @@ body, html {
 .manufacturers a {
     color: #cccccc;
     text-decoration: none;
-    font-weight: 700;
 }
 
 .manufacturers a:hover {
