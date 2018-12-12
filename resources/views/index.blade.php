@@ -104,7 +104,7 @@ p.error-browser
                     </td>
                 </tr>
                 <tr>
-                    <td style="display: flex;padding-top:13px;font-weight:700;">
+                    <td style="display: flex;padding-top:13px;">
                         <a href="callto:89779508373" style="font-size: 14px;" class="header-cart-link">+7 977 950-83-73</a><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
                     </td>
                 </tr>
