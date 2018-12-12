@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     function changeImage (e){
         let target = e.target;
         let fileName = target.getAttribute('data-mark');
-        if(target.classList[0] == "menu-img"){
+        if(target.tagName === 'LI' ||target.tagName === 'IMG' ){
             allBrands.forEach(brand=>{
                 if(brand.classList[1] === 'active-brand'){
                     brand.classList.remove('active-brand');
@@ -57,7 +57,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                 };
 
             });
-            target.parentNode.parentNode.classList.add('active-brand')
+            if(target.parentNode.parentNode.tagName !== 'DIV' && target.parentNode.parentNode.tagName !== 'UL'){
+                target.parentNode.parentNode.classList.add('active-brand');
+            }
         }
     }
 
