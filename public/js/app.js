@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded',()=>{
     const brandsBlock = document.querySelector('.list-brands');
     const allBrands = document.querySelectorAll('.list-brands__item');
@@ -16,9 +17,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     function changeImage (e){
         let target = e.target;
         let fileName = target.getAttribute('data-mark');
-        if(target.tagName === 'LI' ||target.tagName === 'IMG' ){
+        if(target.classList.contains("menu-img") == true){
             allBrands.forEach(brand=>{
-                if(brand.classList[1] === 'active-brand'){
+                if(brand.classList.contains('active-brand') == true){
                     brand.classList.remove('active-brand');
                 }
             });
@@ -57,8 +58,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                 };
 
             });
-            if(target.parentNode.parentNode.tagName !== 'DIV' && target.parentNode.parentNode.tagName !== 'UL'){
+            if(target.tagName !== 'UL'){
                 target.parentNode.parentNode.classList.add('active-brand');
+                console.log
             }
         }
     }

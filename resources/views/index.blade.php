@@ -353,8 +353,9 @@ p.error-browser
     };
 
     function showModel(event, id) {
-        const active = document.querySelector('.model__list.active')
-        document.querySelectorAll('._underline').forEach(u => u.classList.remove('_underline'))
+        const active = document.querySelector('.model__list.active');
+ 
+        document.querySelectorAll('.active-model').forEach(u => u.classList.remove('active-model'))
 
         if (active) {
             active.classList.remove('active')
@@ -363,7 +364,7 @@ p.error-browser
         const model = document.getElementById(`model_${id}`);
 
         if(model) {
-            document.querySelector('#brand_item_'+id).classList.add('_underline')
+            document.querySelector('#brand_item_'+id).classList.add('active-model')
             model.classList.add('active')
             window.localStorage.setItem('activeModel', id)
         }
