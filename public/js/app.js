@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded',()=>{
     const brandsBlock = document.querySelector('.list-brands');
     const allBrands = document.querySelectorAll('.list-brands__item');
@@ -77,7 +76,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             });
             if( target.parentNode.parentNode.tagName != 'UL'){
                 target.parentNode.parentNode.classList.add('active-brand');
-                console.log(target.parentNode.parentNode.tagName)
             }else{
                 target.parentNode.classList.add('active-brand');
             }
