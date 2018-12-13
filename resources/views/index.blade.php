@@ -82,8 +82,9 @@ p.error-browser
                     @foreach ($brandData as $brand)
                         <li class="list-brands__item">
                             @if($brand->id == $carBodyInfo['brand_id'])
-                                <img onclick="showBrand(event, {{$brand->id}})" class={{'menu-img'}}
+                                <img onclick="showBrand(event, {{$brand->id}})" class='menu-img'
                                         onmouseover="showBrand(event, {{$brand->id}})"
+                                        data-active="true"
                                         data-mark="{{$brand->logo_file_name}}"
                                 src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/>
                             @else
