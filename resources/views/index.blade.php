@@ -84,6 +84,7 @@ p.error-browser
                             @if($brand->id == $carBodyInfo['brand_id'])
                                 <img onclick="showBrand(event, {{$brand->id}})" class={{'menu-img'}}
                                         onmouseover="showBrand(event, {{$brand->id}})"
+                                        data-mark="{{$brand->logo_file_name}}"
                                 src="{{ asset('img/brands/'.$brand->logo_file_name) }}"/>
                             @else
                                 <a href="#"><img onclick="showBrand(event, {{$brand->id}})"
