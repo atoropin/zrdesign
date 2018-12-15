@@ -136,7 +136,7 @@ p.error-browser
                 @foreach($brand->models as $model)
                     <ul id="model_{{$model->id}}" class="model__list">
                         @foreach($model->bodies as $body)
-                            <li>
+                            <li class="model-item">
                                 @if($body->id == $carBodyInfo['body_id'])
                                     <u style="color: #ffffff!important; ">{{ $body->name }}</u>
                                 @else

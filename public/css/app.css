@@ -858,3 +858,10 @@ u {
     margin-block-start: 0;
     padding-inline-start: 0;
 }
+
+.model-item{
+    height: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
