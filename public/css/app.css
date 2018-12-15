@@ -343,6 +343,7 @@ body, html {
     width: 100%;
     justify-content: center;
     margin: 0;
+    min-height: 20px
 }
 
 .menu-man {
@@ -756,7 +757,7 @@ body, html {
 
 .model__list li {
     font-family: GothamPro, sans-serif;
-    margin: 5px 20px;
+    margin-left: 20px;
 }
 
 .model__list li a {
