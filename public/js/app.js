@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    const brandsBlock = document.querySelector('.list-brands');
+    // const brandsBlock = document.querySelector('.list-brands');
     const allBrands = document.querySelectorAll('.list-brands__item');
     const brandsImage = document.querySelectorAll('.menu-img');
     const ulBrands = document.querySelector('.list-brands');
