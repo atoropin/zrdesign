@@ -34,8 +34,6 @@ class HomeController extends Controller
             ->orderBy('show_order')
             ->get();
 
-        dd($productsCarousel);
-
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
         $manufacturers = Suppliers::whereNotNull('type')
