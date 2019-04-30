@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    // const brandsBlock = document.querySelector('.list-brands');
+    const brandsBlock = document.querySelector('.list-brands');
     const allBrands = document.querySelectorAll('.list-brands__item');
     const brandsImage = document.querySelectorAll('.menu-img');
     const ulBrands = document.querySelector('.list-brands');
@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         '/img/brands/audi.png',
         '/img/brands/bmw.png',
         '/img/brands/bmw_m.png',
+        '/img/brands/ferrari.png',
+        '/img/brands/lamborghini.png',
         '/img/brands/mercedes.png',
         '/img/brands/mercedes_amg.png',
         '/img/brands/porsche.png',
@@ -39,6 +41,12 @@ document.addEventListener('DOMContentLoaded',()=>{
                 break;
             case 'volkswagen.png':
                 target.src = '/img/brands/hover/volkswagen.png'
+                break;
+            case 'lamborghini.png':
+                target.src = '/img/brands/hover/lamborghini.png'
+                break;
+            case 'ferrari.png':
+                target.src = '/img/brands/hover/ferrari.png'
                 break;
             default : {
                 return false;
@@ -86,7 +94,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         let dataAttr = img.getAttribute('data-mark');
         if(dataAttr === 'audi.png' || dataAttr === 'bmw_m.png' || dataAttr === 'mercedes_amg.png' || dataAttr === 'landrover.png' ){
             img.classList.add('long');
-        } else if(dataAttr === 'bmw.png' || dataAttr === 'audi.png' || dataAttr === 'volkswagen.png'){
+        } else if(dataAttr === 'bmw.png' || dataAttr === 'audi.png' || dataAttr === 'volkswagen.png' || dataAttr === 'lamborghini.png' || dataAttr === 'ferrari.png'){
             img.classList.add('small');
         }
     });
