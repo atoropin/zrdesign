@@ -40,7 +40,7 @@ class UpdateCurrencies extends Command
     public function handle()
     {
         $currenciesArr = $this->getCurrencies();
-        $delta = 1.01;
+        $delta = 1.02;
 
         Currency::where('code', 'DOL')->update([
             'exchange_rate' => $currenciesArr["USD"] * $delta
