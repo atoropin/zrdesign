@@ -40,30 +40,40 @@ class UpdateCurrencies extends Command
     public function handle()
     {
         $currenciesArr = $this->getCurrencies();
+        $delta = 1.01;
 
         Currency::where('code', 'DOL')->update([
-            'exchange_rate' => $currenciesArr["USD"]
+            'exchange_rate' => $currenciesArr["USD"] * $delta
         ]);
 
         Currency::where('code', 'EUR')->update([
-            'exchange_rate' => $currenciesArr["EUR"]
+            'exchange_rate' => $currenciesArr["EUR"] * $delta
+        ]);
+
+        Currency::where('code', 'GBP')->update([
+            'exchange_rate' => $currenciesArr["GBP"] * $delta
         ]);
     }
 
     public function getCurrencies()
     {
-        $res = [];
+        $currenciesArr = [];
 
         /** Getting USD currency */
         $client = new Client();
-        $test = $client->get('http://free.currencyconverterapi.com/api/v5/convert?q=USD_RUB&compact=y')->getBody();
-        $res['USD'] = (json_decode($test)->USD_RUB->val)*1.02;
+        $USDExchangeCurr = $client->get('https://api.exchangeratesapi.io/latest?base=USD')->getBody();
+        $currenciesArr['USD'] = (json_decode($USDExchangeCurr)->rates->RUB);
 
         /** Getting EUR currency */
         $client = new Client();
-        $test = $client->get('http://free.currencyconverterapi.com/api/v5/convert?q=EUR_RUB&compact=y')->getBody();
-        $res['EUR'] = (json_decode($test)->EUR_RUB->val)*1.02;
+        $EURExchangeCurr = $client->get('https://api.exchangeratesapi.io/latest?base=EUR')->getBody();
+        $currenciesArr['EUR'] = (json_decode($EURExchangeCurr)->rates->RUB);
 
-        return $res;
+        /** Getting EUR currency */
+        $client = new Client();
+        $GBPExchangeCurr = $client->get('https://api.exchangeratesapi.io/latest?base=GBP')->getBody();
+        $currenciesArr['GBP'] = (json_decode($GBPExchangeCurr)->rates->RUB);
+
+        return $currenciesArr;
     }
 }
