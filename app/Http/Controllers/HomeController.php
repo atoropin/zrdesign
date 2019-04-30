@@ -30,9 +30,11 @@ class HomeController extends Controller
         }
 
         $productsCarousel = Product::with(['group', 'manufacturer', 'pictures'])
-            ->inRandomOrder()
-            ->take(10)
+            ->where('show_on_main', true)
+            ->orderBy('show_order')
             ->get();
+
+        dd($productsCarousel);
 
         $groups = ProductGroup::orderBy('name', 'asc')->get();
 
