@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded',()=>{
         '/img/brands/audi.png',
         '/img/brands/bmw.png',
         '/img/brands/bmw_m.png',
-        '/img/brands/ferrari.png',
-        '/img/brands/lamborghini.png',
         '/img/brands/mercedes.png',
         '/img/brands/mercedes_amg.png',
         '/img/brands/porsche.png',
         '/img/brands/landrover.png',
-        '/img/brands/volkswagen.png'
+        '/img/brands/volkswagen.png',
+        '/img/brands/ferrari.png',
+        '/img/brands/lamborghini.png'
     ];
 
     function changeHoverMark(markName, target){
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded',()=>{
             case 'volkswagen.png':
                 target.src = '/img/brands/hover/volkswagen.png'
                 break;
-            case 'lamborghini.png':
-                target.src = '/img/brands/hover/lamborghini.png'
-                break;
             case 'ferrari.png':
                 target.src = '/img/brands/hover/ferrari.png'
+                break;
+            case 'lamborghini.png':
+                target.src = '/img/brands/hover/lamborghini.png'
                 break;
             default : {
                 return false;

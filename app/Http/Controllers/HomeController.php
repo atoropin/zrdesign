@@ -257,7 +257,7 @@ class HomeController extends Controller
     public function getCarBrandData()
     {
         return CarBrand::with('models.bodies')
-            ->orderBy('name', 'asc')
+            ->orderBy('logo_updated_at')
             ->get();
     }
 }
