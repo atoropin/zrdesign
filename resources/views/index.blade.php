@@ -106,8 +106,10 @@ p.error-browser
                     </td>
                 </tr>
                 <tr>
-                    <td style="display: flex;padding-top:13px;">
-                        <a href="callto:89779508373" style="font-size: 14px;" class="header-cart-link">+7 977 950-83-73</a><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
+                    <td style="display: flex; padding-top: 13px; justify-content: flex-end;">
+                        <div class="contacts-link" onmouseover="showContacts()">
+                            <span style="cursor: pointer;">Контакты</span>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -452,6 +454,25 @@ p.error-browser
     </div>
 
 </div>
+
+<div class="contacts" onmouseleave="hideContacts()">
+    <div class="contacts-list">
+        <a href="callto:89779508373" style="font-size: 0.9em;" class="header-cart-link">+7 977 950-83-73</a><img class="header-message-icon" src="img/icons/whatsapp.png"><img class="header-message-icon" src="img/icons/viber.png">
+    </div>
+    <div class="contacts-image">
+        <img src="img/office_photo.jpg">
+    </div>
+</div>
+
+<script>
+    function showContacts() {
+        document.querySelector('.contacts').style.display='block';
+    }
+
+    function hideContacts() {
+        document.querySelector('.contacts').style.display='none';
+    }
+</script>
 
 </body>
 </html>

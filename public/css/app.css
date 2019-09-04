@@ -128,9 +128,10 @@ body, html {
 }
 .site-container > * {
     position: relative;
-    z-index: 100;
+    z-index: 3;
     width: 100%;
 }
+
 .site-container:after {
     content: '';
     position: fixed;
@@ -140,7 +141,7 @@ body, html {
     bottom: 0;
     background: url("../img/backgrounds/gradient.png") left center no-repeat fixed;
     background-size: cover;
-    z-index: 5;
+    z-index: 2;
 }
 
 .header-content {
@@ -442,6 +443,42 @@ body, html {
 
 .main-cart-container {
     display: flex;
+}
+
+.contacts {
+    z-index: 4;
+    background-color: rgba(24, 38, 47, 0.8);
+    right: 10px;
+    display: none;
+    position: fixed;
+    top: 80px;
+}
+
+.contacts-link {
+    color: #d6d6d6;
+    font-family: Bodoni;
+    font-size: 0.9em;
+    margin-top: -7px;
+    text-decoration: none;
+}
+
+/*.contacts-link:hover .contacts {*/
+    /*z-index: 4;*/
+    /*background-color: rgba(24, 38, 47, 0.7);*/
+    /*right: 10px;*/
+    /*position: absolute;*/
+    /*display: block;*/
+/*}*/
+
+.contacts-list {
+    justify-content: flex-end;
+    display: flex;
+    margin: 20px 10px 20px 20px;
+}
+
+.contacts-image {
+    display: block;
+    margin: 0 0 -5px 0;
 }
 
 .cart-content {
