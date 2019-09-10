@@ -463,7 +463,10 @@ p.error-browser
         <a href="http://instagram.com/zrperformance" target="_blank" class="contacts-text">@zrperformance</a><img class="contacts-icon" src="img/icons/instagram.png">
     </div>
     <div class="contacts-list">
-        <span class="contacts-text">Варшавское шоссе, 132а</span>
+        <span class="contacts-text">Москва, Варшавское шоссе 132а</span>
+    </div>
+    <div class="contacts-list">
+        <a href="mailto:order@zrdesign.ru" class="contacts-text">order@zrdesign.ru</a>
     </div>
     <div class="contacts-image">
         <img src="img/office_photo.jpg">
