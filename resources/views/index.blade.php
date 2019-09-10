@@ -457,13 +457,13 @@ p.error-browser
 
 <div class="contacts" onmouseleave="hideContacts()">
     <div class="contacts-list">
-        <a href="callto:89779508373" class="contacts-text">+7 977 950-83-73</a><img class="contacts-icon" src="img/icons/whatsapp.png"><img class="contacts-icon" src="img/icons/viber.png">
+        <a href="callto:89779508373" class="contacts-text">+7&nbsp;977&nbsp;950-83-73</a><img class="contacts-icon" src="img/icons/whatsapp.png"><img class="contacts-icon" src="img/icons/viber.png">
     </div>
     <div class="contacts-list">
         <a href="http://instagram.com/zrperformance" target="_blank" class="contacts-text">@zrperformance</a><img class="contacts-icon" src="img/icons/instagram.png">
     </div>
     <div class="contacts-list">
-        <span class="contacts-text">Москва, Варшавское шоссе 132а</span>
+        <span class="contacts-text">Москва,&nbsp;Варшавское&nbsp;шоссе&nbsp;132а</span>
     </div>
     <div class="contacts-list">
         <a href="mailto:order@zrdesign.ru" class="contacts-text">order@zrdesign.ru</a>
