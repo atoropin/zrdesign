@@ -447,38 +447,44 @@ body, html {
 
 .contacts {
     z-index: 4;
-    background-color: rgba(24, 38, 47, 0.8);
+    background-color: rgba(24, 38, 47, 0.9);
     right: 10px;
     display: none;
     position: fixed;
-    top: 80px;
+    top: 5vw;
 }
 
 .contacts-link {
     color: #d6d6d6;
     font-family: Bodoni;
-    font-size: 0.9em;
+    font-size: 17px;
     margin-top: -7px;
     text-decoration: none;
 }
 
-/*.contacts-link:hover .contacts {*/
-    /*z-index: 4;*/
-    /*background-color: rgba(24, 38, 47, 0.7);*/
-    /*right: 10px;*/
-    /*position: absolute;*/
-    /*display: block;*/
-/*}*/
+.contacts-icon {
+    max-height: 1.1vw;
+    display: block;
+    margin-top: -1px;
+    margin-left: 6px;
+}
 
 .contacts-list {
     justify-content: flex-end;
     display: flex;
-    margin: 20px 10px 20px 20px;
+    margin: 10px 10px 0 20px;
+}
+
+.contacts-text {
+    color: #d6d6d6;
+    font-family: Bodoni;
+    font-size: 17px;
+    text-decoration: none;
 }
 
 .contacts-image {
     display: block;
-    margin: 0 0 -5px 0;
+    margin: 10px 0 -5px 0;
 }
 
 .cart-content {
