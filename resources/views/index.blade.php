@@ -264,9 +264,9 @@ p.error-browser
                     @foreach($allManufacturers as $manufacturer)
                         <li>
                             @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
-                                <a style="color: #ca2d25;" href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                                <a style="color: #ca2d25;" href="{{ route('products', ['manufacturer' => $manufacturer->id]) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                             @else
-                                <a href="{{ route('products', array_merge($parameters, ['manufacturer' => $manufacturer->id])) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
+                                <a href="{{ route('products', ['manufacturer' => $manufacturer->id]) }}">{{ mb_strtoupper($manufacturer->name) }}</a>
                             @endif
                         </li>
                     @endforeach
