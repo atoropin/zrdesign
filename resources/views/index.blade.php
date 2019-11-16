@@ -224,7 +224,7 @@ p.error-browser
                     </div>
                     <div class="content-product-info">
                         <div class="content-product-info-price"><span class="content-product-info-price-button">
-                                @isset($product->manufacturer->currency && $product->base_price != 0){{ strrev(chunk_split(strrev(round($product->base_price * $product->manufacturer->currency->exchange_rate)), 3, ' ')) }} руб.@elseЦена по запросу@endisset
+                                @if(isset($product->manufacturer->currency) && $product->base_price != 0){{ strrev(chunk_split(strrev(round($product->base_price * $product->manufacturer->currency->exchange_rate)), 3, ' ')) }} руб.@elseЦена по запросу@endisset
                             </span></div>
                         <div class="content-product-info-cart"><a class="content-product-info-cart-button" href='#' id="addToCartButton{{ $product->id }}"
                                                                   onclick="addToCart({{ $product->id }}); return false" style="text-decoration: none">В корзину</a>
