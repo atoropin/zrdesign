@@ -79,6 +79,7 @@ p.error-browser
             </div>
             <div class="header-brand-menu">
                 <ul class="list-brands">
+                @if(!empty($brandData))
                     @foreach ($brandData as $brand)
                         <li class="list-brands__item">
                             @if($brand->id == $carBodyInfo['brand_id'])
@@ -95,6 +96,7 @@ p.error-browser
                             @endif
                         </li>
                     @endforeach
+                @endif
                 </ul>
             </div>
             <table class="header-cart-table">
@@ -117,6 +119,7 @@ p.error-browser
     </header>
     <div class="menu-hz-content">
         <div class="menu-hz">
+        @if(!empty($brandData))
             @foreach ($brandData as $brand)
                 <ul id="brand_{{$brand->id}}" class="brand__list">
                     @foreach($brand->models as $model)
@@ -130,10 +133,12 @@ p.error-browser
                     @endforeach
                 </ul>
             @endforeach
+        @endif
         </div>
     </div>
     <div class="menu-hz-content">
         <div class="menu-hz models">
+        @if(!empty($brandData))
             @foreach ($brandData as $brand)
                 @foreach($brand->models as $model)
                     <ul id="model_{{$model->id}}" class="model__list">
@@ -149,6 +154,7 @@ p.error-browser
                     </ul>
                 @endforeach
             @endforeach
+        @endif
         </div>
     </div>
     @isset($parameters['body'])
@@ -156,6 +162,7 @@ p.error-browser
             <div class="menu-man-content">
                 <div class="menu-man">
                     <ul class="manufacturers-hz">
+                    @if(!empty($manufacturers))
                         @foreach($manufacturers as $manufacturer)
                             <li>
                                 @if(isset($parameters['manufacturer']) && $manufacturer->id == $parameters['manufacturer'])
@@ -165,6 +172,7 @@ p.error-browser
                                 @endif
                             </li>
                         @endforeach
+                    @endif
                     </ul>
                 </div>
             </div>
