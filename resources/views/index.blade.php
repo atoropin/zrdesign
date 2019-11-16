@@ -187,6 +187,7 @@ p.error-browser
                             <a href="{{ route('products', ['body' => $parameters['body']]) }}">Весь список для <b>{{ $bodyName }}</b></a>
                         </li>
                     @endisset
+                    @if(!empty($groups))
                     @foreach($groups as $group)
                         <li>
                             @if(isset($parameters['group']) && $group->id == $parameters['group'])
@@ -196,6 +197,7 @@ p.error-browser
                             @endif
                         </li>
                     @endforeach
+                    @endif
                 </ul>
             </div>
         </div>
